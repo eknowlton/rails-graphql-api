@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Developer Setup
 
-Things you may want to cover:
+- Clone repository
+- Ensure ruby version is set to version in `.ruby-version` file
 
-* Ruby version
+In your terminal:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```shell
+$ git clone git@github.com:kimmelsg/central-api.git && cd central-api
+$ cat .ruby-version
+# Ensure your ruby version matches, use `rbenv` to manage multiple ruby versions
+$ ruby bin/development.rb
+```
