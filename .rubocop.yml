@@ -1,0 +1,40 @@
+Rails:
+  Enabled: true
+  Exclude:
+    - 'lib/env_generator.rb'
+Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'config/**/*'
+    - 'bin/**/*'
+  TargetRubyVersion: 2.5.1
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Layout/IndentArray:
+  EnforcedStyle: consistent
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+Metrics/LineLength:
+  Max: 100
+Metrics/ClassLength:
+  Exclude:
+    - 'app/graphql/mutation_type.rb'
+    - 'app/graphql/query_type.rb'
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context', 'shared_examples']
+  Exclude:
+    - 'spec/factories/*'
+    - 'app/operations/**/outputs/*'
+Naming/UncommunicativeMethodParamName:
+  AllowedNames: ['io', 'id', 'to', 'as']
+Style/ConditionalAssignment:
+  Enabled: false
