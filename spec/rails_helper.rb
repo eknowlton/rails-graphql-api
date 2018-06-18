@@ -51,4 +51,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  Shoulda::Matchers.configure do |matchers|
+    matchers.integrate do |with|
+      with.test_framework :rspec
+      with.library :active_model
+    end
+  end
+
+  config.include GraphQLHelpers, :graphql
 end
