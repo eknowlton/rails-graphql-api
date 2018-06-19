@@ -7,6 +7,7 @@ class CreateUser
     user = new_user
 
     if user.save
+      send_welcome(user)
       Result.success(user: user)
     else
       Result.failure(user.errors)
@@ -26,5 +27,9 @@ class CreateUser
 
   def random_password
     SecureRandom.base64(10)
+  end
+
+  def send_welcome(user)
+    SendWelcomeEmailJob.perform_later(user.id)
   end
 end

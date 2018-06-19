@@ -17,6 +17,21 @@ RSpec.describe CreateUser do
       expect(result.success?).to be(true)
     end
 
+    it 'sends a welcome email' do
+      params = {
+        email: 'john@kimmel.com',
+        first_name: 'John',
+        last_name: 'Doe'
+      }
+
+      result = perform_enqueued_jobs do
+        described_class.new(params).call
+      end
+
+      delivery = ActionMailer::Base.deliveries.last
+      expect(delivery.to).to include(result.user.email)
+    end
+
     it 'returns errors when user is not valid' do
       params = {
         first_name: 'John',

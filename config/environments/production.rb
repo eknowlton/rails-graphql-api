@@ -55,6 +55,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "central-api_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :username),
+    password: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :password),
+    address: 'smtp.mailgun.org',
+    domain: 'email.kimmel.com',
+    port: '2525',
+    authentication: :plain
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
