@@ -1,0 +1,3 @@
+reek:
+  exclude:
+    - 'db/**/*'
