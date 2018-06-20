@@ -10,4 +10,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   has_secure_password
+
+  scope :active, -> { where(active: true) }
+
+  def guest?
+    false
+  end
 end

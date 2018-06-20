@@ -1,5 +1,6 @@
 module GraphQLHelpers
-  def execute(query, context: {}, variables: {})
+  def execute(query, as: Guest.new, context: {}, variables: {})
+    context[:current_user] = as unless context.key?(:current_user)
     CentralSchema.execute(
       query,
       context: context,

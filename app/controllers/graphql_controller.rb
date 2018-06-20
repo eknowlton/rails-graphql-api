@@ -3,7 +3,7 @@ class GraphqlController < ApplicationController
     result = CentralSchema.execute(
       params[:query],
       variables: ensure_hash(params[:variables]),
-      context: {},
+      context: { current_user: current_user },
       operation_name: params[:operationName]
     )
     render json: result
@@ -30,5 +30,11 @@ class GraphqlController < ApplicationController
     else
       {}
     end
+  end
+
+  def current_user
+    TokenAuthentication.new(
+      token_string: headers['HTTP_AUTHORIZATION']
+    ).authenticate
   end
 end

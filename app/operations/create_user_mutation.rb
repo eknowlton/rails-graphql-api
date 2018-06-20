@@ -6,7 +6,9 @@ class CreateUserMutation < Types::BaseMutation
   field :user, Outputs::UserType, null: true
   field :errors, function: Resolvers::Error.new, null: false
 
-  def resolve
+  policy UserPolicy, :manage?
+
+  def authorized_resolve
     result = CreateUser.new(user_args).call
 
     if result.success?

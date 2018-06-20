@@ -18,4 +18,32 @@ RSpec.describe User, type: :model do
       expect(duplicate_user).not_to be_valid
     end
   end
+
+  describe '.active' do
+    it 'can find active users' do
+      user = create(:user)
+
+      found_user = described_class.active.first
+
+      expect(found_user).to eq(user)
+    end
+
+    it 'does not find suspended users' do
+      create(:user, :suspended)
+
+      found_user = described_class.active.first
+
+      expect(found_user).to be(nil)
+    end
+  end
+
+  describe '#guest?' do
+    it 'returns false' do
+      user = User.new
+
+      result = user.guest?
+
+      expect(result).to be(false)
+    end
+  end
 end

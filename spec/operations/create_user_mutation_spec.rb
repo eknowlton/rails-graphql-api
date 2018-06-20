@@ -15,7 +15,9 @@ describe 'Create User Mutation API', :graphql do
     end
 
     it 'makes a new user' do
-      execute query, variables: {
+      user = build(:user)
+
+      execute query, as: user, variables: {
         input: {
           userInput: {
             email: 'john@kimmel.com',

@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_06_19_132940) do
     t.string "password_digest", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
