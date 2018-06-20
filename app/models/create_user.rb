@@ -30,6 +30,7 @@ class CreateUser
   end
 
   def send_welcome(user)
+    ResetPasswordToken.create(user: user)
     SendWelcomeEmailJob.perform_later(user.id)
   end
 end
