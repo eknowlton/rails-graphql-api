@@ -1,0 +1,51 @@
+---
+version: 2
+jobs:
+  build:
+    working_directory: ~/central
+    docker:
+      - image: circleci/ruby:2.5.1
+        environment:
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_USERNAME: central
+          DATABASE_PASSWORD: ''
+          RAILS_ENV: test
+      - image: postgres:10.4
+        environment:
+          POSTGRES_USER: central
+          POSTGRES_DB: central_test
+          POSTGRES_PASSWORD: ''
+    steps:
+      - checkout
+
+      # Install pronto dependency
+      - run: sudo apt-get install cmake
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - central-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - central-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: central-{{ checksum "Gemfile.lock" }}
+
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Setup the database
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # Run the tests
+      - run: CI=true bundle exec rake
+
+      - run: echo 'export PRONTO_PULL_REQUEST_ID=${CI_PULL_REQUEST##*/}' >> $BASH_ENV
+      - run: if [ -n "$PRONTO_PULL_REQUEST_ID" ]; then bundle exec pronto run -f github_pr_review -c origin/develop; fi
