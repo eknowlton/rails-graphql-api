@@ -4,6 +4,7 @@ RSpec.describe WelcomeMailer, type: :mailer do
   describe '.welcome_email' do
     it 'builds the mail' do
       user = create(:user)
+      create(:reset_password_token, user: user)
 
       mail = described_class.welcome_email(user: user)
 
