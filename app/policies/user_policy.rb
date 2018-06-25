@@ -1,5 +1,5 @@
 class UserPolicy < ApplicationPolicy
   def manage?
-    !user.guest?
+    user.can?(:manage_users)
   end
 end

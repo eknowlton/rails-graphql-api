@@ -4,4 +4,6 @@ class MutationType < Types::BaseObject
   field :create_role, mutation: CreateRoleMutation
   field :update_role, mutation: UpdateRoleMutation
   field :delete_role, mutation: DeleteRoleMutation
+  field :set_abilities_for_role, mutation: SetAbilitiesForRoleMutation
+  field :set_abilities_for_user, mutation: SetAbilitiesForUserMutation
 end

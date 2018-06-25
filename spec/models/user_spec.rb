@@ -46,4 +46,66 @@ RSpec.describe User, type: :model do
       expect(result).to be(false)
     end
   end
+
+  describe '#abilites' do
+    it 'returns the abilities that are assigned to a user' do
+      ability = Abilities.first
+      user = described_class.new
+      user.permissions.new(ability: ability)
+
+      abilities = user.abilities
+
+      expect(abilities).to include(ability)
+    end
+
+    it 'returns any abilities the user has gained from their role' do
+      ability = Abilities.first
+      role = create(:role)
+      role.permissions.create(ability: ability)
+      user = described_class.new(role: role)
+
+      abilities = user.abilities
+
+      expect(abilities).to include(ability)
+    end
+  end
+
+  describe '#abilities=' do
+    it 'assigns temporary abilities to the user' do
+      first_ability, second_ability = Abilities.take(2)
+      user = create(:user)
+
+      user.abilities = [first_ability, second_ability]
+
+      expect(user.abilities).to include(first_ability, second_ability)
+      expect(User.first.abilities).not_to include(first_ability, second_ability)
+    end
+
+    it 'does not assign abilities that do not exist' do
+      user = create(:user)
+
+      user.abilities = [:fake_ability]
+
+      expect(user.abilities).not_to include(:fake_ability)
+    end
+  end
+
+  describe '#can?' do
+    it 'returns true if the user has the ability to perform the specified action' do
+      ability = Abilities.first
+      user = described_class.new(abilities: [ability])
+
+      can = user.can?(ability)
+
+      expect(can).to be(true)
+    end
+
+    it 'returns false if the user does not have the ability to perform the specified action' do
+      user = described_class.new
+
+      can = user.can?(:do_anything)
+
+      expect(can).to be(false)
+    end
+  end
 end

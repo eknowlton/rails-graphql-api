@@ -16,7 +16,7 @@ describe 'Update Role Mutation API', :graphql do
 
     it 'updates the specified role' do
       role = create(:role)
-      user = build(:user)
+      user = build(:user, abilities: [:manage_roles])
 
       result = execute query, as: user, variables: {
         input: {

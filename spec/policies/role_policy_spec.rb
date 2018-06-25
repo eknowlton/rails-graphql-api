@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe RolePolicy do
   describe '#manage?' do
-    it 'returns true' do
-      user = build_stubbed(:user)
+    it 'returns if the user can manage roles' do
+      user = build_stubbed(:user, abilities: [:manage_roles])
       policy = described_class.new(user)
 
       result = policy.manage?

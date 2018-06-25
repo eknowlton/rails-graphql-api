@@ -15,7 +15,7 @@ describe 'Create Role Mutation API', :graphql do
     end
 
     it 'makes a new role' do
-      user = build(:user)
+      user = build(:user, abilities: [:manage_roles])
 
       result = execute query, as: user, variables: {
         input: {

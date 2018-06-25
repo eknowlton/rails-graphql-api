@@ -13,7 +13,7 @@ describe 'Delete Role Mutation API', :graphql do
     end
 
     it 'deletes the specified role' do
-      user = build(:user)
+      user = build(:user, abilities: [:manage_roles])
       role = create(:role)
 
       result = execute query, as: user, variables: { input: { id: role.id } }

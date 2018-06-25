@@ -5,5 +5,28 @@ module Outputs
     field :email, String, null: false
     field :first_name, String, null: false
     field :last_name, String, null: false
+    field :abilities,
+          [AbilityType],
+          null: true,
+          description: <<~DESC
+            A list of abilities the user has. Includes the users own abilities
+            and any abilties gained from their role.
+          DESC
+    field :own_abilities,
+          [AbilityType],
+          null: true,
+          description: 'A list of abilities that are assigned directly to the user.'
+    field :role_abilities,
+          [AbilityType],
+          null: true,
+          description: 'A list of abilities granted to the user by their role.'
+
+    def own_abilities
+      @object.permissions.map(&:ability)
+    end
+
+    def role_abilities
+      @object.role_permissions.map(&:ability)
+    end
   end
 end

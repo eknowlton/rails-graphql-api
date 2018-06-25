@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_151841) do
+ActiveRecord::Schema.define(version: 2018_06_21_131351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "ability"
+    t.string "permissable_type", null: false
+    t.bigint "permissable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_permissions_on_deleted_at"
+    t.index ["permissable_id", "permissable_type", "ability"], name: "index_permissions_on_permissable_and_ability", unique: true
+    t.index ["permissable_type", "permissable_id"], name: "index_permissions_on_permissable_type_and_permissable_id"
+  end
 
   create_table "reset_password_tokens", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -37,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_06_20_151841) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.bigint "role_id"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "first_name", null: false
@@ -47,7 +60,9 @@ ActiveRecord::Schema.define(version: 2018_06_20_151841) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "reset_password_tokens", "users"
+  add_foreign_key "users", "roles"
 end

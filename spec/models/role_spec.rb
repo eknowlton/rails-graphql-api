@@ -15,4 +15,16 @@ RSpec.describe Role, type: :model do
       expect(duplicate_role).not_to be_valid
     end
   end
+
+  describe '#abilites' do
+    it 'returns the abilties that the role has' do
+      ability = Abilities.first
+      role = Role.new
+      role.permissions.new(ability: ability)
+
+      abilities = role.abilities
+
+      expect(abilities).to include(ability)
+    end
+  end
 end
