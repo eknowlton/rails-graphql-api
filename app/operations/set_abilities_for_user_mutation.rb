@@ -2,7 +2,7 @@ class SetAbilitiesForUserMutation < Types::BaseMutation
   description 'Syncs the abilities of the specified user to those provided'
 
   argument :id, ID, required: true
-  argument :abilities, [AbilityType], required: true
+  argument :abilities, [Types::AbilityType], required: true
 
   field :user, Outputs::UserType, null: true
   field :errors, function: Resolvers::Error.new, null: false

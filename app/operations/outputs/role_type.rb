@@ -4,6 +4,6 @@ module Outputs
 
     field :id, ID, null: false
     field :name, String, null: false
-    field :abilities, [AbilityType], null: true
+    field :abilities, [Types::AbilityType], null: true
   end
 end
