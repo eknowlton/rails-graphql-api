@@ -108,4 +108,14 @@ RSpec.describe User, type: :model do
       expect(can).to be(false)
     end
   end
+
+  describe '#suspend' do
+    it 'makes the user inactive' do
+      user = create(:user, active: true)
+
+      user.suspend
+
+      expect(user.active).to be(false)
+    end
+  end
 end

@@ -35,6 +35,10 @@ class User < ApplicationRecord
     abilities.include?(action.downcase.to_sym)
   end
 
+  def suspend
+    update(active: false)
+  end
+
   private
 
   def temp_abilities
