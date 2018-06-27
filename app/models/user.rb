@@ -39,6 +39,14 @@ class User < ApplicationRecord
     update(active: false)
   end
 
+  def update_password(current:, new:)
+    if authenticate(current)
+      update(password: new)
+    else
+      false
+    end
+  end
+
   private
 
   def temp_abilities

@@ -118,4 +118,26 @@ RSpec.describe User, type: :model do
       expect(user.active).to be(false)
     end
   end
+
+  describe '#update_password' do
+    it 'confirms the current password and then changes it' do
+      user = create(:user, password: 'original')
+      original_password = user.password_digest
+
+      result = user.update_password(current: 'original', new: 'new_password')
+
+      expect(result).to be(true)
+      expect(user.reload.password_digest).not_to eq(original_password)
+    end
+
+    it 'does not update the password if the provided current password does not match' do
+      user = create(:user, password: 'original')
+      original_password = user.password_digest
+
+      result = user.update_password(current: 'not_a_match', new: 'new_password')
+
+      expect(result).to be(false)
+      expect(user.reload.password_digest).to eq(original_password)
+    end
+  end
 end
