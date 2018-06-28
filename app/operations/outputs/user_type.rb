@@ -6,6 +6,7 @@ module Outputs
     field :first_name, String, null: false
     field :last_name, String, null: false
     field :active, Boolean, null: false
+    field :admin, Boolean, null: false
     field :abilities,
           [Types::AbilityType],
           null: true,
@@ -21,6 +22,10 @@ module Outputs
           [Types::AbilityType],
           null: true,
           description: 'A list of abilities granted to the user by their role.'
+
+    def admin
+      @object.admin?
+    end
 
     def own_abilities
       @object.permissions.map(&:ability)

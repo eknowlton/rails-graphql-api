@@ -15,7 +15,7 @@ describe 'Create User Mutation API', :graphql do
     end
 
     it 'makes a new user' do
-      user = build(:user, abilities: [:manage_users])
+      user = build(:user, abilities: [:manage_central])
 
       execute query, as: user, variables: {
         input: {

@@ -1,7 +1,8 @@
 # An ability that grants permissions
 enum Ability {
-  MANAGE_ROLES
-  MANAGE_USERS
+  MANAGE_CENTRAL
+  MANAGE_DOORS
+  MANAGE_MESSAGING
 }
 
 interface ActiveRecord {
@@ -131,6 +132,9 @@ input PatchUserInput {
 }
 
 type Query {
+  # Returns the currently logged in user
+  me: User
+
   # The role for the specified id
   role(id: ID!): Role
 
@@ -355,6 +359,7 @@ type User implements ActiveRecord {
   # and any abilties gained from their role.
   abilities: [Ability!]
   active: Boolean!
+  admin: Boolean!
 
   # The date and time when then record was created
   createdAt: ISO8601DateTime!

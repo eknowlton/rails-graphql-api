@@ -140,4 +140,22 @@ RSpec.describe User, type: :model do
       expect(user.reload.password_digest).to eq(original_password)
     end
   end
+
+  describe '#admin?' do
+    it 'returns true if the user is an admin' do
+      user = create(:user, abilities: [:manage_central])
+
+      result = user.admin?
+
+      expect(result).to be(true)
+    end
+
+    it 'returns false if the user is not an admin' do
+      user = create(:user, abilities: [])
+
+      result = user.admin?
+
+      expect(result).to be(false)
+    end
+  end
 end

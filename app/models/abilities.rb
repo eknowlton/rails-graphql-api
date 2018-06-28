@@ -1,6 +1,7 @@
 Abilities = Array.new(
   %i[
-    manage_users
-    manage_roles
+    manage_central
+    manage_messaging
+    manage_doors
   ]
 )

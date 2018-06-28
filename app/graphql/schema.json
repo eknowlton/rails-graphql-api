@@ -35,6 +35,20 @@
           "description": null,
           "fields": [
             {
+              "name": "me",
+              "description": "Returns the currently logged in user",
+              "args": [
+
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "role",
               "description": "The role for the specified id",
               "args": [
@@ -177,6 +191,24 @@
             },
             {
               "name": "active",
+              "description": null,
+              "args": [
+
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "admin",
               "description": null,
               "args": [
 
@@ -462,13 +494,19 @@
           "interfaces": null,
           "enumValues": [
             {
-              "name": "MANAGE_USERS",
+              "name": "MANAGE_CENTRAL",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "MANAGE_ROLES",
+              "name": "MANAGE_MESSAGING",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "MANAGE_DOORS",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

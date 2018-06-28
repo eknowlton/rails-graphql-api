@@ -47,6 +47,10 @@ class User < ApplicationRecord
     end
   end
 
+  def admin?
+    can?(:manage_central)
+  end
+
   private
 
   def temp_abilities

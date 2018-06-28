@@ -24,12 +24,12 @@ RSpec.describe AccessToken do
     end
 
     it 'it contains the users abilities' do
-      user = create(:user, abilities: [:manage_users])
+      user = create(:user, abilities: [:manage_central])
       token = AccessToken.issue(user)
 
       decoded_token = AccessToken.decode(token.body)
 
-      expect(decoded_token['abilities']).to include('manage_users')
+      expect(decoded_token['abilities']).to include('manage_central')
     end
   end
 end

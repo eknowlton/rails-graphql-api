@@ -15,7 +15,7 @@ describe 'Set Abilities for Role Mutation API', :graphql do
     end
 
     it 'assigns abilities to a role' do
-      acting_user = build(:user, abilities: [:manage_roles])
+      acting_user = build(:user, abilities: [:manage_central])
       role = create(:role)
       first_ability, second_ability = Abilities.take(2).map do |ability|
         ability.to_s.upcase
