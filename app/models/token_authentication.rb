@@ -6,7 +6,7 @@ class TokenAuthentication
   end
 
   def authenticate
-    data = Token.decode(token_string)
+    data = AccessToken.decode(token_string)
     return Guest.new unless data
 
     find_user(data['email']) || Guest.new

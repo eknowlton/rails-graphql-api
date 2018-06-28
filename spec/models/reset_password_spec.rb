@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ResetPassword do
   describe '#call' do
-    it 'updates a users password and returns an auth token when reset password token valid' do
+    it 'updates a users password and returns an access token and refresh token' do
       user = create(:user)
       reset_token = create(:reset_password_token, user: user, created_at: Date.current)
       old_password = user.password_digest
@@ -10,7 +10,8 @@ RSpec.describe ResetPassword do
       result = described_class.new(token_body: reset_token.body, password: 'newPassword').call
 
       expect(result.success?).to be(true)
-      expect(result.auth_token).not_to be_nil
+      expect(result.access_token).not_to be_nil
+      expect(result.refresh_token).not_to be_nil
       expect(user.reload.password_digest).not_to eq(old_password)
     end
 

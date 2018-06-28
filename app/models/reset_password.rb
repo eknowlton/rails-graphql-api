@@ -22,7 +22,9 @@ class ResetPassword
     user = reset_token.user
     if user.update(password: password)
       reset_token.use
-      Result.success(user: user, auth_token: Token.issue(user))
+      Result.success(user: user,
+                     access_token: AccessToken.issue(user),
+                     refresh_token: RefreshToken.issue(user))
     else
       Result.failure(user.errors)
     end

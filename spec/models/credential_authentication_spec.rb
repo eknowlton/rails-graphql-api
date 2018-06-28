@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe CredentialAuthentication do
-  it 'returns a token with a valid email and password' do
+  it 'returns an access token and refresh token when provided with a valid email and password' do
     user = create(:user, password: 'test-password')
     auth = described_class.new(email: user.email, password: 'test-password')
 
     result = auth.authenticate
 
     expect(result.success?).to be(true)
-    expect(result.token).to be_a(Token)
-    expect(result.token.body).not_to be_nil
+    expect(result.access_token).to be_a(AccessToken)
+    expect(result.access_token.body).not_to be_nil
+    expect(result.refresh_token).to be_a(RefreshToken)
+    expect(result.refresh_token.body).not_to be_nil
     expect(result.user).to eq(user)
   end
 

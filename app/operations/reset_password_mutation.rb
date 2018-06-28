@@ -5,19 +5,26 @@ class ResetPasswordMutation < Types::BaseMutation
   argument :reset_password_token, String, required: true
 
   field :user, Outputs::UserType, null: true
-  field :token, Outputs::TokenType, null: true, description: 'A valid auth token for the user'
+  field :access_token, Outputs::TokenType, null: true
+  field :refresh_token, Outputs::TokenType, null: true
   field :errors, function: Resolvers::Error.new, null: false
 
   def resolve
-    result = ResetPassword.new(
-      token_body: input.reset_password_token,
-      password: input.password
-    ).call
+    result = ResetPassword.new(reset_password_args).call
 
     if result.success?
-      { user: result.user, token: result.auth_token, errors: [] }
+      { user: result.user,
+        access_token: result.access_token,
+        refresh_token: result.refresh_token,
+        errors: [] }
     else
       { user: nil, token: nil, errors: result.errors }
     end
+  end
+
+  private
+
+  def reset_password_args
+    { token_body: input.reset_password_token, password: input.password }
   end
 end

@@ -1,6 +1,5 @@
 class Token
   ALGORITHM = 'HS256'.freeze
-  EXPIRATION = 7.days.from_now.to_i
 
   attr_reader :body
 
@@ -9,7 +8,7 @@ class Token
   end
 
   def self.decode(token)
-    JWT.decode(token, secret, algorithm: 'HS256').first
+    JWT.decode(token, secret, algorithm: ALGORITHM).first
   rescue JWT::DecodeError
     false
   end
@@ -18,16 +17,22 @@ class Token
     @body = body
   end
 
-  def self.payload(user)
-    {
-      email: user.email,
-      exp: EXPIRATION
-    }
-  end
-  private_class_method :payload
+  class << self
+    private
 
-  def self.secret
-    Rails.application.credentials[:jwt_secret]
+    def payload(user)
+      {
+        email: user.email,
+        exp: expiration
+      }
+    end
+
+    def secret
+      raise NotImplementedError, "#{self.class.name}.secret should expose the secret"
+    end
+
+    def expiration
+      raise NotImplementedError, "#{self.class.name}.expiration should define the validity period"
+    end
   end
-  private_class_method :secret
 end

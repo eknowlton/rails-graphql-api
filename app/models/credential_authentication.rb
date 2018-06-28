@@ -8,7 +8,9 @@ class CredentialAuthentication
 
   def authenticate
     if user&.authenticate(password)
-      Result.success(token: Token.issue(user), user: user)
+      Result.success(access_token: AccessToken.issue(user),
+                     refresh_token: RefreshToken.issue(user),
+                     user: user)
     else
       Result.failure(errors: ['Invalid email or password'])
     end

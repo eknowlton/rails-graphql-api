@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TokenAuthentication do
   it 'returns the authenticated user with a valid token' do
     user = create(:user)
-    token = Token.issue(user)
+    token = AccessToken.issue(user)
     auth = described_class.new(token_string: token.body)
 
     authenticated_user = auth.authenticate
@@ -21,7 +21,7 @@ RSpec.describe TokenAuthentication do
 
   it 'returns guest if the user is suspended' do
     user = create(:user, :suspended)
-    token = Token.issue(user)
+    token = AccessToken.issue(user)
     auth = described_class.new(token_string: token.body)
 
     guest_user = auth.authenticate

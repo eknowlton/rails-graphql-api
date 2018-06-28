@@ -1,8 +1,10 @@
-class SignInUserMutation < Types::BaseMutation
-  description 'Sign the user in'
+class RefreshTokensMutation < Types::BaseMutation
+  description <<~DESC
+    When an access token expires this mutation should be hit with a valid
+    refresh token. It will issue a new access token and a new refresh token.
+  DESC
 
-  argument :email, String, required: true
-  argument :password, String, required: true
+  argument :refresh_token, String, required: true
 
   field :user, Outputs::UserType, null: true
   field :access_token, Outputs::TokenType, null: true
@@ -10,7 +12,7 @@ class SignInUserMutation < Types::BaseMutation
   field :errors, function: Resolvers::Error.new
 
   def resolve
-    result = CredentialAuthentication.new(email: input.email, password: input.password).authenticate
+    result = RefreshTokens.new(input.refresh_token).call
 
     if result.success?
       { user: result.user,
