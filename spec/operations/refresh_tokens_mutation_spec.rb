@@ -9,12 +9,8 @@ describe 'Refresh Tokens Mutation API', :graphql do
             user {
               email
             }
-            refreshToken {
-              body
-            }
-            accessToken {
-              body
-            }
+            refreshToken
+            accessToken
           }
         }
       GRAPHQL
@@ -22,18 +18,18 @@ describe 'Refresh Tokens Mutation API', :graphql do
 
     it 'provides new refresh and access tokens when provided with a valid refresh token' do
       user = create(:user)
-      token = RefreshToken.issue(user)
+      token_body = RefreshToken.issue(user)
 
       result = execute query, variables: {
         input: {
-          refreshToken: token.body
+          refreshToken: token_body
         }
       }
 
       refresh_tokens = result[:data][:refreshTokens]
       expect(refresh_tokens[:user][:email]).to eq(user.email)
-      expect(refresh_tokens[:accessToken][:body]).not_to be_nil
-      expect(refresh_tokens[:refreshToken][:body]).not_to be_nil
+      expect(refresh_tokens[:accessToken]).not_to be_nil
+      expect(refresh_tokens[:refreshToken]).not_to be_nil
     end
   end
 end

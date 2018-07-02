@@ -6,8 +6,8 @@ class RefreshTokens
   def call
     decoded_token = RefreshToken.decode(token_string)
 
-    if decoded_token
-      user = User.active.find_by(email: decoded_token['email'])
+    if decoded_token.valid?
+      user = decoded_token.user
       Result.success(user: user,
                      access_token: AccessToken.issue(user),
                      refresh_token: RefreshToken.issue(user))

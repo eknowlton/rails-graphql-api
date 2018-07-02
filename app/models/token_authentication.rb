@@ -6,15 +6,12 @@ class TokenAuthentication
   end
 
   def authenticate
-    data = AccessToken.decode(token_string)
-    return Guest.new unless data
+    decoded_token = AccessToken.decode(token_string)
 
-    find_user(data['email']) || Guest.new
-  end
-
-  private
-
-  def find_user(email)
-    User.active.find_by(email: email)
+    if decoded_token.valid?
+      decoded_token.user
+    else
+      Guest.new
+    end
   end
 end

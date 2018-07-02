@@ -6,12 +6,8 @@ describe 'Reset Password Mutation API', :graphql do
       <<~'GRAPHQL'
         mutation($input: ResetPasswordInput!) {
           resetPassword(input: $input) {
-            accessToken {
-              body
-            }
-            refreshToken {
-              body
-            }
+            accessToken
+            refreshToken
           }
         }
       GRAPHQL
@@ -30,8 +26,8 @@ describe 'Reset Password Mutation API', :graphql do
       }
 
       reset_password = result[:data][:resetPassword]
-      expect(reset_password[:accessToken][:body]).not_to be_nil
-      expect(reset_password[:refreshToken][:body]).not_to be_nil
+      expect(reset_password[:accessToken]).not_to be_nil
+      expect(reset_password[:refreshToken]).not_to be_nil
       expect(user.reload.password_digest).not_to eq(old_password)
     end
   end

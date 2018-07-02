@@ -8,10 +8,8 @@ RSpec.describe CredentialAuthentication do
     result = auth.authenticate
 
     expect(result.success?).to be(true)
-    expect(result.access_token).to be_a(AccessToken)
-    expect(result.access_token.body).not_to be_nil
-    expect(result.refresh_token).to be_a(RefreshToken)
-    expect(result.refresh_token.body).not_to be_nil
+    expect(result.access_token).not_to be_nil
+    expect(result.refresh_token).not_to be_nil
     expect(result.user).to eq(user)
   end
 

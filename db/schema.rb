@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2018_06_21_131351) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "active", default: true
+    t.integer "token_version", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"

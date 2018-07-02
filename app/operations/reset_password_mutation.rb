@@ -5,8 +5,8 @@ class ResetPasswordMutation < Types::BaseMutation
   argument :reset_password_token, String, required: true
 
   field :user, Outputs::UserType, null: true
-  field :access_token, Outputs::TokenType, null: true
-  field :refresh_token, Outputs::TokenType, null: true
+  field :access_token, String, null: true
+  field :refresh_token, String, null: true
   field :errors, function: Resolvers::Error.new, null: false
 
   def resolve

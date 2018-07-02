@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:password).is_at_least(8) }
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:token_version) }
 
     it 'is not valid with a non-unique email' do
       user = create(:user)
@@ -156,6 +157,17 @@ RSpec.describe User, type: :model do
       result = user.admin?
 
       expect(result).to be(false)
+    end
+  end
+
+  describe '#invalidate_tokens' do
+    it 'increments the token_version' do
+      user = create(:user, token_version: 2)
+
+      result = user.invalidate_tokens
+
+      expect(result).to be(true)
+      expect(user.token_version).to be(3)
     end
   end
 end

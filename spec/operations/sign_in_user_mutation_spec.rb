@@ -6,12 +6,8 @@ describe 'Sign In User Mutation API', :graphql do
       <<~'GRAPHQL'
         mutation($input: SignInUserInput!) {
           signInUser(input: $input) {
-            accessToken {
-              body
-            }
-            refreshToken {
-              body
-            }
+            accessToken
+            refreshToken
             user {
               email
             }
@@ -37,8 +33,8 @@ describe 'Sign In User Mutation API', :graphql do
       sign_in_user = result[:data][:signInUser]
       email = sign_in_user[:user][:email]
       expect(email).to eq(user.email)
-      expect(sign_in_user[:accessToken][:body]).not_to be_nil
-      expect(sign_in_user[:refreshToken][:body]).not_to be_nil
+      expect(sign_in_user[:accessToken]).not_to be_nil
+      expect(sign_in_user[:refreshToken]).not_to be_nil
     end
 
     it 'does not authenticate with invalid email' do

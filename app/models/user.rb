@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, allow_nil: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :token_version, presence: true
 
   has_secure_password
 
@@ -49,6 +50,10 @@ class User < ApplicationRecord
 
   def admin?
     can?(:manage_central)
+  end
+
+  def invalidate_tokens
+    increment(:token_version).save
   end
 
   private
