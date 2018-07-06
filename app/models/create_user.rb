@@ -8,6 +8,7 @@ class CreateUser
 
     if user.save
       send_welcome(user)
+      notify_user_created(user)
       Result.success(user: user)
     else
       Result.failure(user.errors)
@@ -32,5 +33,9 @@ class CreateUser
   def send_welcome(user)
     ResetPasswordToken.create(user: user)
     SendWelcomeEmailJob.perform_later(user.id)
+  end
+
+  def notify_user_created(user)
+    DeliveryBoy.deliver_async(UserCreatedEvent.new(user).to_json, topic: 'users')
   end
 end

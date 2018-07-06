@@ -32,6 +32,22 @@ RSpec.describe CreateUser do
       expect(delivery.to).to include(result.user.email)
     end
 
+    it 'broadcasts that the user has been created' do
+      params = {
+        email: 'john@kimmel.com',
+        first_name: 'John',
+        last_name: 'Doe'
+      }
+
+      described_class.new(params).call
+
+      messages = DeliveryBoy.testing.messages_for('users')
+      expect(messages.count).to eq(1)
+      event = JSON.parse(messages.first.value)
+      expect(event['type']).to eq('user_created')
+      expect(event['user']['email']).to eq('john@kimmel.com')
+    end
+
     it 'returns errors when user is not valid' do
       params = {
         first_name: 'John',
