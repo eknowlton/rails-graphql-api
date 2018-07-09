@@ -8,6 +8,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'delivery_boy'
 gem 'dotenv-rails'
 gem 'graphql'
+gem 'json_schemer'
 gem 'jwt'
 gem 'paranoia', '~> 2.2'
 gem 'pg', '>= 0.18', '< 2.0'

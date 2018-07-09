@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "user",
+    "published_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "user": {
+      "type": "object",
+      "required": [
+        "email",
+        "first_name",
+        "last_name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

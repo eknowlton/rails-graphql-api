@@ -11,7 +11,7 @@ class UserCreatedEvent
       user: {
         email: user.email,
         first_name: user.first_name,
-        last_name: user.last_name,
+        last_name: user.last_name
       },
       published_at: Time.current
     }.to_json
