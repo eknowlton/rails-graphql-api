@@ -36,6 +36,6 @@ class CreateUser
   end
 
   def notify_user_created(user)
-    DeliveryBoy.deliver_async(UserCreatedEvent.new(user).to_json, topic: 'users')
+    DeliveryBoy.deliver_async(UserCreatedEvent.new(user).to_json, topic: 'user_created')
   end
 end

@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2018_06_21_131351) do
 
   create_table "users", force: :cascade do |t|
     t.bigint "role_id"
+    t.integer "walter_id"
+    t.integer "intranet_id"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "first_name", null: false

@@ -13,12 +13,24 @@
     "user": {
       "type": "object",
       "required": [
+        "id",
+        "walter_id",
+        "intranet_id",
         "email",
         "first_name",
         "last_name"
       ],
       "additionalProperties": false,
       "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "walter_id": {
+          "type": "integer"
+        },
+        "intranet_id": {
+          "type": "integer"
+        },
         "email": {
           "type": "string",
           "format": "email"

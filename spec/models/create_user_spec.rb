@@ -41,7 +41,7 @@ RSpec.describe CreateUser do
 
       described_class.new(params).call
 
-      messages = DeliveryBoy.testing.messages_for('users')
+      messages = DeliveryBoy.testing.messages_for('user_created')
       expect(messages.count).to eq(1)
       event = JSON.parse(messages.first.value)
       expect(event['type']).to eq('user_created')
