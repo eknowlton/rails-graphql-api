@@ -13,7 +13,7 @@ class UpdatePasswordMutation < Types::BaseMutation
     if current_user.update_password(current: input.current_password, new: input.new_password)
       { user: current_user, errors: [] }
     else
-      { user: nil, errors: current_user.errors }
+      { user: nil, errors: ['Password failed to update'] }
     end
   end
 end
