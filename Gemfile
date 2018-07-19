@@ -16,6 +16,7 @@ gem 'puma', '~> 3.11'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.0'
 gem 'redis', '~> 4.0'
+gem 'sentry-raven'
 gem 'skylight'
 
 group :development, :test do
