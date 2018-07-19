@@ -11,17 +11,18 @@ class UpdateUserMutation < Types::BaseMutation
 
   def authorized_resolve
     user = User.find(input.id)
+    result = UpdateUser.new(user: user, params: user_input).call
 
-    if user.update(user_args)
-      { user: user, errors: [] }
+    if result.success?
+      { user: result.user, errors: [] }
     else
-      { user: nil, errors: user.errors }
+      { user: nil, errors: result.errors }
     end
   end
 
   private
 
-  def user_args
+  def user_input
     input.user_input.to_h
   end
 end
