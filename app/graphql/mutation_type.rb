@@ -2,6 +2,7 @@ class MutationType < Types::BaseObject
   field :sign_in_user, mutation: SignInUserMutation
   field :refresh_tokens, mutation: RefreshTokensMutation
   field :invalidate_user_tokens, mutation: InvalidateUserTokensMutation
+  field :impersonate_user, mutation: ImpersonateUserMutation
   field :create_user, mutation: CreateUserMutation
   field :update_user, mutation: UpdateUserMutation
   field :update_password, mutation: UpdatePasswordMutation
