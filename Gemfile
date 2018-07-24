@@ -17,6 +17,7 @@ gem 'rack-cors'
 gem 'rails', '~> 5.2.0'
 gem 'redis', '~> 4.0'
 gem 'sentry-raven'
+gem 'sidekiq'
 gem 'skylight'
 
 group :development, :test do

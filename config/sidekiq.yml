@@ -1,0 +1,5 @@
+:verbose: false
+:pidfile: /home/deploy/server/api/sidekiq.pid
+:queues:
+  - default
+  - searchkick
