@@ -14,6 +14,9 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, allow_nil: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :abbreviation, presence: true
+  validates :title, presence: true
+  validates :hire_date, presence: true
   validates :token_version, presence: true
 
   has_secure_password
@@ -54,6 +57,10 @@ class User < ApplicationRecord
 
   def invalidate_tokens
     increment(:token_version).save
+  end
+
+  def preferred_name
+    nickname || first_name
   end
 
   private

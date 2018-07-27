@@ -3,11 +3,7 @@ require 'rails_helper'
 RSpec.describe CreateUser do
   describe '#call' do
     it 'creates a new user with a random password' do
-      params = {
-        email: 'john@kimmel.com',
-        first_name: 'John',
-        last_name: 'Doe'
-      }
+      params = attributes_for(:user)
 
       result = described_class.new(params).call
 
@@ -18,11 +14,7 @@ RSpec.describe CreateUser do
     end
 
     it 'sends a welcome email' do
-      params = {
-        email: 'john@kimmel.com',
-        first_name: 'John',
-        last_name: 'Doe'
-      }
+      params = attributes_for(:user)
 
       result = perform_enqueued_jobs do
         described_class.new(params).call
@@ -33,11 +25,7 @@ RSpec.describe CreateUser do
     end
 
     it 'broadcasts that the user has been created' do
-      params = {
-        email: 'john@kimmel.com',
-        first_name: 'John',
-        last_name: 'Doe'
-      }
+      params = attributes_for(:user, email: 'john@kimmel.com')
 
       described_class.new(params).call
 

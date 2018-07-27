@@ -14,11 +14,13 @@
       "type": "object",
       "required": [
         "id",
-        "walter_id",
-        "intranet_id",
         "email",
         "first_name",
-        "last_name"
+        "last_name",
+        "preferred_name",
+        "abbreviation",
+        "title",
+        "hire_date"
       ],
       "additionalProperties": false,
       "properties": {
@@ -26,10 +28,16 @@
           "type": "integer"
         },
         "walter_id": {
-          "type": "integer"
+          "type": [
+            "null",
+            "integer"
+          ]
         },
         "intranet_id": {
-          "type": "integer"
+          "type": [
+            "null",
+            "integer"
+          ]
         },
         "email": {
           "type": "string",
@@ -40,6 +48,38 @@
         },
         "last_name": {
           "type": "string"
+        },
+        "nickname": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "preferred_name": {
+          "type": "string"
+        },
+        "abbreviation": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "linkedin_url": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "birth_date": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date"
+        },
+        "hire_date": {
+          "type": "string",
+          "format": "date"
         }
       }
     },

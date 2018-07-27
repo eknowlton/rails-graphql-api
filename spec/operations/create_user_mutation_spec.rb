@@ -22,7 +22,10 @@ describe 'Create User Mutation API', :graphql do
           userInput: {
             email: 'john@kimmel.com',
             firstName: 'John',
-            lastName: 'Doe'
+            lastName: 'Doe',
+            abbreviation: 'JAD',
+            title: 'Tester',
+            hireDate: '2017-01-01'
           }
         }
       }
