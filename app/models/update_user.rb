@@ -18,6 +18,10 @@ class UpdateUser
   attr_reader :user, :params
 
   def notify_user_updated(user)
-    DeliveryBoy.deliver_async(UserUpdatedEvent.new(user).to_json, topic: 'user_updated')
+    DeliveryBoy.deliver_async(
+      UserUpdatedEvent.new(user).to_json,
+      topic: 'user',
+      partition_key: user.id
+    )
   end
 end
