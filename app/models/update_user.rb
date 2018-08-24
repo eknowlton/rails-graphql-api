@@ -20,7 +20,7 @@ class UpdateUser
   def notify_user_updated(user)
     DeliveryBoy.deliver_async(
       UserUpdatedEvent.new(user).to_json,
-      topic: 'user',
+      topic: "user_#{Rails.env}",
       partition_key: user.id
     )
   end

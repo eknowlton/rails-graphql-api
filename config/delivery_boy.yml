@@ -4,14 +4,12 @@ common: &common
 
 development:
   <<: *common
-  sasl_scram_username: <%= Rails.application.credentials.dig(:development, :kafka, :username) %>
-  sasl_scram_password: <%= Rails.application.credentials.dig(:development, :kafka, :password) %>
+  sasl_scram_username: <%= Rails.application.credentials.dig(:kafka_username) %>
+  sasl_scram_password: <%= Rails.application.credentials.dig(:kafka_password) %>
   sasl_scram_mechanism: sha256
   ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
   brokers:
-    - omnibus-01.srvs.cloudkafka.com:9094
-    - omnibus-02.srvs.cloudkafka.com:9094
-    - omnibus-03.srvs.cloudkafka.com:9094
+    - deluxe-caboose-01.srvs.cloudkafka.com:9094
 
 test:
   <<: *common
@@ -20,8 +18,8 @@ test:
 
 production:
   <<: *common
-  sasl_scram_username: <%= Rails.application.credentials.dig(:development, :kafka, :username) %>
-  sasl_scram_password: <%= Rails.application.credentials.dig(:development, :kafka, :password) %>
+  sasl_scram_username: <%= Rails.application.credentials.dig(:kafka_username) %>
+  sasl_scram_password: <%= Rails.application.credentials.dig(:kafka_password) %>
   sasl_scram_mechanism: sha256
   ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
   brokers:
