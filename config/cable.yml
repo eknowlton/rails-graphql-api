@@ -4,6 +4,11 @@ development:
 test:
   adapter: async
 
+staging:
+  adapter: redis
+  url: <%= Rails.application.credentials.dig(Rails.env.to_sym, :redis_url) %>
+  channel_prefix: central_staging
+
 production:
   adapter: redis
   url: <%= Rails.application.credentials.dig(Rails.env.to_sym, :redis_url) %>

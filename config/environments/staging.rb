@@ -59,10 +59,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :username),
     password: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :password),
-    address: 'smtp.mailgun.org',
-    domain: 'email.kimmel.com',
+    address: 'smtp.mailtrap.io',
+    domain: 'smtp.mailtrap.io',
     port: '2525',
-    authentication: :plain
+    authentication: :cram_md5
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
