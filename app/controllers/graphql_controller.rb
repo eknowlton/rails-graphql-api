@@ -34,7 +34,7 @@ class GraphqlController < ApplicationController
 
   def current_user
     TokenAuthentication.new(
-      token_string: headers['HTTP_AUTHORIZATION']
+      token_string: request.headers['HTTP_AUTHORIZATION']
     ).authenticate
   end
 end
