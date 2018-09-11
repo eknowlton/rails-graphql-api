@@ -1,4 +1,4 @@
-<h1>Welcome to Kimmel Messaging!</h1>
+<h1>Welcome to Kimmel!</h1>
 
 <p>
   To set your password please <%= link_to_frontend(
@@ -6,18 +6,3 @@
     url: "reset?token=#{@token}"
   ) %>.
 </p>
-
-<p>To access this app in the future, please use the following details.</p>
-
-<ul>
-<li>
-<strong>URL</strong>: <a href="https://kimmel.chat">https://kimmel.chat</a>
-</li>
-<li>
-<strong>Email</strong>: <%= @user.email %>
-</li>
-</ul>
-
-<h1>Please ensure you allow notifications when prompted!</h1>
-
-<h3>If you need assistance please contact Quintin at extension 174.</h3>
