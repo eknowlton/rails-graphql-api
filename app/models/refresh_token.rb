@@ -38,7 +38,7 @@ class RefreshToken
     end
 
     def secret
-      Rails.application.credentials[:jwt_refresh_secret]
+      Rails.application.credentials[Rails.env.to_sym][:jwt_refresh_secret]
     end
 
     def expiration
