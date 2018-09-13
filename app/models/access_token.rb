@@ -38,7 +38,7 @@ class AccessToken
     end
 
     def secret
-      Rails.application.credentials[:jwt_access_secret]
+      Rails.application.credentials[Rails.env.to_sym][:jwt_access_secret]
     end
 
     def expiration
