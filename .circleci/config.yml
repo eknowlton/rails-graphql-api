@@ -1,20 +1,37 @@
----
 version: 2
+
+aliases:
+  - &docker
+    - image: circleci/ruby:2.5.1
+      environment:
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_USERNAME: central
+        DATABASE_PASSWORD: ""
+        RAILS_ENV: test
+    - image: postgres:10.4
+      environment:
+        POSTGRES_USER: central
+        POSTGRES_DB: central_test
+        POSTGRES_PASSWORD: ""
+
+  - &restore-cache
+    keys:
+      - central-api-{{ checksum "Gemfile.lock" }}
+      # fallback to using the latest cache if no exact match is found
+      - central-api-
+
+  - &save-cache
+    paths:
+      - ./vendor/bundle
+    key: central-api-{{ checksum "Gemfile.lock" }}
+
+defaults: &defaults
+  working_directory: ~/central
+  docker: *docker
+
 jobs:
   build:
-    working_directory: ~/central
-    docker:
-      - image: circleci/ruby:2.5.1
-        environment:
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_USERNAME: central
-          DATABASE_PASSWORD: ''
-          RAILS_ENV: test
-      - image: postgres:10.4
-        environment:
-          POSTGRES_USER: central
-          POSTGRES_DB: central_test
-          POSTGRES_PASSWORD: ''
+    <<: *defaults
     steps:
       - checkout
 
@@ -22,20 +39,23 @@ jobs:
       - run: sudo apt-get install cmake
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - central-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - central-
+      - restore_cache: *restore-cache
 
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: central-{{ checksum "Gemfile.lock" }}
+
+      - save_cache: *save-cache
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-cache
+
+      # Set bundle path to point to cache
+      - run: bundle config --local path vendor/bundle
 
       # Wait for DB
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
@@ -43,9 +63,29 @@ jobs:
       # Setup the database
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-
       # Run the tests
       - run: CI=true bundle exec rake
 
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *restore-cache
+
+      # Set bundle path to point to cache
+      - run: bundle config --local path vendor/bundle
+
       - run: echo 'export PRONTO_PULL_REQUEST_ID=${CI_PULL_REQUEST##*/}' >> $BASH_ENV
       - run: if [ -n "$PRONTO_PULL_REQUEST_ID" ]; then bundle exec pronto run -f github_pr_review -c origin/develop; fi
+
+workflows:
+  version: 2
+  build_test_lint:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - lint:
+          requires:
+            - build
