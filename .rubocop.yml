@@ -13,7 +13,6 @@ AllCops:
     - 'bin/**/*'
     - 'app/models/user_created_event.rb'
     - 'app/models/user_updated_event.rb'
-  TargetRubyVersion: 2.5.1
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Lambda:
