@@ -19,6 +19,6 @@ class CredentialAuthentication
   private
 
   def user
-    @user ||= User.active.find_by(email: email)
+    @user ||= User.active.find_by(email: email.downcase)
   end
 end
