@@ -50,15 +50,6 @@ chdir APP_ROOT do
 
   EnvGenerator.new(application: application, database: database).call
 
-  puts "\n== Installing System Dependencies =="
-
-  if ! system('brew ls --versions cmake')
-    puts 'Installing "cmake" via Homebrew ... '
-    system 'brew install cmake'
-  else
-    puts 'Homebrew "cmake" is already installed.'
-  end
-
   puts "\n== Installing dependencies =="
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')

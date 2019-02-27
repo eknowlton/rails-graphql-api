@@ -1,5 +1,5 @@
 class ImpersonateUserMutation < Types::BaseMutation
-  description 'Provides refresh and access tokens for the specified user'
+  description "Provides refresh and access tokens for the specified user"
 
   argument :user_id, ID, required: true
 
@@ -15,7 +15,7 @@ class ImpersonateUserMutation < Types::BaseMutation
     {
       user: user,
       access_token: AccessToken.issue(user),
-      refresh_token: RefreshToken.issue(user)
+      refresh_token: RefreshToken.issue(user),
     }
   end
 end

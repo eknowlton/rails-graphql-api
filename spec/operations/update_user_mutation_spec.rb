@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Update User Mutation API', :graphql do
-  describe 'updateUser' do
+describe "Update User Mutation API", :graphql do
+  describe "updateUser" do
     let(:query) do
       <<~'GRAPHQL'
         mutation($input: UpdateUserInput!) {
@@ -14,7 +14,7 @@ describe 'Update User Mutation API', :graphql do
       GRAPHQL
     end
 
-    it 'updates the specified user' do
+    it "updates the specified user" do
       user = create(:user)
       acting_user = build(:user, abilities: [:manage_central])
 
@@ -22,14 +22,14 @@ describe 'Update User Mutation API', :graphql do
         input: {
           id: user.id,
           userInput: {
-            firstName: 'Alex'
-          }
-        }
+            firstName: "Alex",
+          },
+        },
       }
 
       first_name = result[:data][:updateUser][:user][:firstName]
-      expect(first_name).to eq('Alex')
-      expect(user.reload.first_name).to eq('Alex')
+      expect(first_name).to eq("Alex")
+      expect(user.reload.first_name).to eq("Alex")
     end
   end
 end

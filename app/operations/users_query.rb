@@ -1,5 +1,5 @@
 class UsersQuery < Types::BaseResolver
-  description 'Get all users'
+  description "Get all users"
   type [Outputs::UserType], null: false
   policy ApplicationPolicy, :logged_in?
 

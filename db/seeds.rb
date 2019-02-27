@@ -9,23 +9,23 @@
 User.create!(
   walter_id: 1,
   intranet_id: 1,
-  email: 'test@kimmel.com',
-  password: 'Tester12',
-  first_name: 'John',
-  last_name: 'Doe',
-  abbreviation: 'JAD',
-  title: 'Software Developer',
-  hire_date: '2015/01/01'
+  email: "test@kimmel.com",
+  password: "Tester12",
+  first_name: "John",
+  last_name: "Doe",
+  abbreviation: "JAD",
+  title: "Software Developer",
+  hire_date: "2015/01/01"
 )
 
 User.create!(
   walter_id: 2,
   intranet_id: 2,
-  email: 'example@kimmel.com',
-  password: 'Tester12',
-  first_name: 'Jane',
-  last_name: 'Doe',
-  abbreviation: 'JBD',
-  title: 'Quality Assurance',
-  hire_date: '2015/01/01'
+  email: "example@kimmel.com",
+  password: "Tester12",
+  first_name: "Jane",
+  last_name: "Doe",
+  abbreviation: "JBD",
+  title: "Quality Assurance",
+  hire_date: "2015/01/01"
 )

@@ -1,5 +1,5 @@
 class SignInUserMutation < Types::BaseMutation
-  description 'Sign the user in'
+  description "Sign the user in"
 
   argument :email, String, required: true
   argument :password, String, required: true
@@ -13,12 +13,12 @@ class SignInUserMutation < Types::BaseMutation
     result = CredentialAuthentication.new(email: input.email, password: input.password).authenticate
 
     if result.success?
-      { user: result.user,
-        access_token: result.access_token,
-        refresh_token: result.refresh_token,
-        errors: [] }
+      {user: result.user,
+       access_token: result.access_token,
+       refresh_token: result.refresh_token,
+       errors: [],}
     else
-      { user: nil, access_token: nil, refresh_token: nil, errors: result.errors }
+      {user: nil, access_token: nil, refresh_token: nil, errors: result.errors}
     end
   end
 end

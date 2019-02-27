@@ -35,9 +35,6 @@ jobs:
     steps:
       - checkout
 
-      # Install pronto dependency
-      - run: sudo apt-get install cmake
-
       # Download and cache dependencies
       - restore_cache: *restore-cache
 
@@ -75,8 +72,7 @@ jobs:
       # Set bundle path to point to cache
       - run: bundle config --local path vendor/bundle
 
-      - run: echo 'export PRONTO_PULL_REQUEST_ID=${CI_PULL_REQUEST##*/}' >> $BASH_ENV
-      - run: if [ -n "$PRONTO_PULL_REQUEST_ID" ]; then bundle exec pronto run -f github_pr_review -c origin/develop; fi
+      - run: rake standard STANDARDOPTS="--format progress --rails"
 
 workflows:
   version: 2

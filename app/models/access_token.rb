@@ -1,5 +1,5 @@
 class AccessToken
-  ALGORITHM = 'HS256'.freeze
+  ALGORITHM = "HS256".freeze
 
   def self.issue(user)
     JWT.encode(payload(user), secret, ALGORITHM)
@@ -33,7 +33,7 @@ class AccessToken
       {
         email: user.email,
         exp: expiration,
-        abilities: user.abilities
+        abilities: user.abilities,
       }
     end
 

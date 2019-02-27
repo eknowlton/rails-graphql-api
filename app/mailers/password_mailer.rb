@@ -4,6 +4,6 @@ class PasswordMailer < ApplicationMailer
     @token = user.reset_password_token.body
     @date = Date.current
 
-    mail(to: @user.email, subject: 'Reset Password - Kimmel')
+    mail(to: @user.email, subject: "Reset Password - Kimmel")
   end
 end

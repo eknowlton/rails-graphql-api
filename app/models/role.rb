@@ -1,8 +1,8 @@
 class Role < ApplicationRecord
   has_many :permissions,
-           as: :permissable,
-           inverse_of: :permissable,
-           dependent: :destroy
+    as: :permissable,
+    inverse_of: :permissable,
+    dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 

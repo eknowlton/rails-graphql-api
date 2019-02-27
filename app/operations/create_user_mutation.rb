@@ -1,5 +1,5 @@
 class CreateUserMutation < Types::BaseMutation
-  description 'Creates a new user'
+  description "Creates a new user"
 
   argument :user_input, Inputs::User, required: true
 
@@ -12,9 +12,9 @@ class CreateUserMutation < Types::BaseMutation
     result = CreateUser.new(user_args).call
 
     if result.success?
-      { user: result.user, errors: [] }
+      {user: result.user, errors: []}
     else
-      { user: nil, errors: result.errors }
+      {user: nil, errors: result.errors}
     end
   end
 

@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SendPasswordResetEmailJob, type: :job do
-  describe '#perform' do
-    it 'sends a email to the specified user' do
+  describe "#perform" do
+    it "sends a email to the specified user" do
       user = create(:user)
       token = create(:reset_password_token, user: user)
 

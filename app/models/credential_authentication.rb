@@ -12,7 +12,7 @@ class CredentialAuthentication
                      refresh_token: RefreshToken.issue(user),
                      user: user)
     else
-      Result.failure(['Invalid email or password'])
+      Result.failure(["Invalid email or password"])
     end
   end
 

@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -32,6 +32,6 @@ module CentralApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.frontend_host = 'localhost:3000'
+    config.frontend_host = "localhost:3000"
   end
 end

@@ -1,5 +1,5 @@
 class SetAbilitiesForUserMutation < Types::BaseMutation
-  description 'Syncs the abilities of the specified user to those provided'
+  description "Syncs the abilities of the specified user to those provided"
 
   argument :id, ID, required: true
   argument :abilities, [Types::AbilityType], required: true
@@ -14,9 +14,9 @@ class SetAbilitiesForUserMutation < Types::BaseMutation
     result = SyncAbilities.new(user, input.abilities).call
 
     if result.success?
-      { user: user, errors: [] }
+      {user: user, errors: []}
     else
-      { user: nil, errors: user.errors }
+      {user: nil, errors: user.errors}
     end
   end
 end

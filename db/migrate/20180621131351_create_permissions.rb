@@ -9,8 +9,8 @@ class CreatePermissions < ActiveRecord::Migration[5.2]
 
       t.index :deleted_at
       t.index [:permissable_id, :permissable_type, :ability],
-              unique: true,
-              name: 'index_permissions_on_permissable_and_ability'
+        unique: true,
+        name: "index_permissions_on_permissable_and_ability"
     end
   end
 end

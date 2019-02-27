@@ -1,5 +1,5 @@
 class InvalidateUserTokensMutation < Types::BaseMutation
-  description 'Invalidates all issued refresh tokens for the specified user'
+  description "Invalidates all issued refresh tokens for the specified user"
 
   argument :id, ID, required: true
 
@@ -12,9 +12,9 @@ class InvalidateUserTokensMutation < Types::BaseMutation
     user = User.find(input.id)
 
     if user.invalidate_tokens
-      { user: user, errors: [] }
+      {user: user, errors: []}
     else
-      { user: nil, errors: user.errors }
+      {user: nil, errors: user.errors}
     end
   end
 end

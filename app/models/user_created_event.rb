@@ -5,9 +5,9 @@ class UserCreatedEvent
 
   def to_json
     {
-      type: 'user_created',
+      type: "user_created",
       published_at: Time.current,
-      user: user_hash
+      user: user_hash,
     }.to_json
   end
 
@@ -29,7 +29,7 @@ class UserCreatedEvent
       title: user.title,
       linkedin_url: user.linkedin_url,
       birth_date: user.birth_date,
-      hire_date: user.hire_date
+      hire_date: user.hire_date,
     }
   end
 end

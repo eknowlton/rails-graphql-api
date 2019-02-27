@@ -14,20 +14,20 @@ module Outputs
     field :active, Boolean, null: false
     field :admin, Boolean, null: false
     field :abilities,
-          [Types::AbilityType],
-          null: true,
-          description: <<~DESC
-            A list of abilities the user has. Includes the users own abilities
-            and any abilties gained from their role.
-          DESC
+      [Types::AbilityType],
+      null: true,
+      description: <<~DESC
+        A list of abilities the user has. Includes the users own abilities
+        and any abilties gained from their role.
+      DESC
     field :own_abilities,
-          [Types::AbilityType],
-          null: true,
-          description: 'A list of abilities that are assigned directly to the user.'
+      [Types::AbilityType],
+      null: true,
+      description: "A list of abilities that are assigned directly to the user."
     field :role_abilities,
-          [Types::AbilityType],
-          null: true,
-          description: 'A list of abilities granted to the user by their role.'
+      [Types::AbilityType],
+      null: true,
+      description: "A list of abilities granted to the user by their role."
 
     def admin
       @object.admin?

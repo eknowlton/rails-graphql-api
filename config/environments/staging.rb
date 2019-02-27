@@ -20,7 +20,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -45,7 +45,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -59,10 +59,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :username),
     password: Rails.application.credentials.dig(Rails.env.to_sym, :mail, :password),
-    address: 'smtp.mailtrap.io',
-    domain: 'smtp.mailtrap.io',
-    port: '2525',
-    authentication: :cram_md5
+    address: "smtp.mailtrap.io",
+    domain: "smtp.mailtrap.io",
+    port: "2525",
+    authentication: :cram_md5,
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -91,5 +91,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.frontend_host = 'dev.kimmel.chat'
+  config.frontend_host = "dev.kimmel.chat"
 end

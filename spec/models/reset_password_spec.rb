@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ResetPassword do
-  describe '#call' do
-    it 'updates a users password and returns an access token and refresh token' do
+  describe "#call" do
+    it "updates a users password and returns an access token and refresh token" do
       user = create(:user)
       reset_token = create(:reset_password_token, user: user, created_at: Date.current)
       old_password = user.password_digest
 
-      result = described_class.new(token_body: reset_token.body, password: 'newPassword').call
+      result = described_class.new(token_body: reset_token.body, password: "newPassword").call
 
       expect(result.success?).to be(true)
       expect(result.access_token).not_to be_nil
@@ -15,31 +15,31 @@ RSpec.describe ResetPassword do
       expect(user.reload.password_digest).not_to eq(old_password)
     end
 
-    it 'returns an error if the reset token string is invalid' do
+    it "returns an error if the reset token string is invalid" do
       user = create(:user)
       create(:reset_password_token, user: user)
 
-      result = described_class.new(token_body: 'invalidToken', password: 'newPassword').call
+      result = described_class.new(token_body: "invalidToken", password: "newPassword").call
 
       expect(result.success?).to be(false)
       expect(result.errors).not_to be_empty
     end
 
-    it 'returns an error if the reset token string is expired' do
+    it "returns an error if the reset token string is expired" do
       user = create(:user)
       reset_token = create(:reset_password_token, user: user, created_at: 10.days.ago)
 
-      result = described_class.new(token_body: reset_token.body, password: 'newPassword').call
+      result = described_class.new(token_body: reset_token.body, password: "newPassword").call
 
       expect(result.success?).to be(false)
       expect(result.errors).not_to be_empty
     end
 
-    it 'returns an error if the reset token has already been used' do
+    it "returns an error if the reset token has already been used" do
       user = create(:user)
       reset_token = create(:reset_password_token, user: user, used: true)
 
-      result = described_class.new(token_body: reset_token.body, password: 'newPassword').call
+      result = described_class.new(token_body: reset_token.body, password: "newPassword").call
 
       expect(result.success?).to be(false)
       expect(result.errors).not_to be_empty

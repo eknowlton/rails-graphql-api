@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Impersonate User Mutation API', :graphql do
-  describe 'impersonateUser' do
+describe "Impersonate User Mutation API", :graphql do
+  describe "impersonateUser" do
     let(:query) do
       <<~'GRAPHQL'
         mutation($input: ImpersonateUserInput!) {
@@ -16,14 +16,14 @@ describe 'Impersonate User Mutation API', :graphql do
       GRAPHQL
     end
 
-    it 'provides tokens for the specified user' do
+    it "provides tokens for the specified user" do
       user = build(:user, abilities: [:manage_central])
       impersonated_user = create(:user)
 
       result = execute query, as: user, variables: {
         input: {
-          userId: impersonated_user.id
-        }
+          userId: impersonated_user.id,
+        },
       }
 
       impersonate_user = result[:data][:impersonateUser]

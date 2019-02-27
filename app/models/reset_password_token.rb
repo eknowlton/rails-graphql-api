@@ -5,7 +5,7 @@ class ResetPasswordToken < ApplicationRecord
 
   has_secure_token :body
 
-  scope :active, -> { where('created_at >= ?', expires).where(used: false) }
+  scope :active, -> { where("created_at >= ?", expires).where(used: false) }
 
   def self.find_active(body)
     active.find_by(body: body)

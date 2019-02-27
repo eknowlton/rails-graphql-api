@@ -1,5 +1,5 @@
 class UpdateUserMutation < Types::BaseMutation
-  description 'Update the specified user'
+  description "Update the specified user"
 
   argument :id, ID, required: true
   argument :user_input, Inputs::PatchUser, required: true
@@ -14,9 +14,9 @@ class UpdateUserMutation < Types::BaseMutation
     result = UpdateUser.new(user: user, params: user_input).call
 
     if result.success?
-      { user: result.user, errors: [] }
+      {user: result.user, errors: []}
     else
-      { user: nil, errors: result.errors }
+      {user: nil, errors: result.errors}
     end
   end
 

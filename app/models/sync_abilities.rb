@@ -21,10 +21,10 @@ class SyncAbilities
 
   def create_new_abilities
     permissable.permissions << new_abilities
-                               .reject { |ability| permissable.abilities.include?(ability) }
-                               .map do |ability|
-                                 Permission.new(permissable: permissable, ability: ability)
-                               end
+      .reject { |ability| permissable.abilities.include?(ability) }
+      .map { |ability|
+      Permission.new(permissable: permissable, ability: ability)
+    }
   end
 
   def delete_old_abilities

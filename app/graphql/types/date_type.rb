@@ -1,6 +1,6 @@
 module Types
   class DateType < Types::BaseScalar
-    description 'Date in ISO 8601 format: yyyy-mm-dd'
+    description "Date in ISO 8601 format: yyyy-mm-dd"
 
     def self.coerce_input(value, _ctx)
       coerce_date(value)
@@ -12,7 +12,7 @@ module Types
 
     def self.coerce_date(input)
       Date.strptime(input).to_s
-    rescue StandardError
+    rescue
       nil
     end
   end

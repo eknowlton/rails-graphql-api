@@ -1,5 +1,5 @@
 class UpdateRoleMutation < Types::BaseMutation
-  description 'Update the specified role'
+  description "Update the specified role"
 
   argument :id, ID, required: true
   argument :role_input, Inputs::PatchRole, required: true
@@ -13,9 +13,9 @@ class UpdateRoleMutation < Types::BaseMutation
     role = Role.find(input.id)
 
     if role.update(role_args)
-      { role: role, errors: [] }
+      {role: role, errors: []}
     else
-      { role: nil, errors: role.errors }
+      {role: nil, errors: role.errors}
     end
   end
 

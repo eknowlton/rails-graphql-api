@@ -12,7 +12,7 @@ class RefreshTokens
                      access_token: AccessToken.issue(user),
                      refresh_token: RefreshToken.issue(user))
     else
-      Result.failure(['Invalid refresh token'])
+      Result.failure(["Invalid refresh token"])
     end
   end
 

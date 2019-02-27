@@ -1,5 +1,5 @@
 class RefreshToken
-  ALGORITHM = 'HS256'.freeze
+  ALGORITHM = "HS256".freeze
 
   def self.issue(user)
     JWT.encode(payload(user), secret, ALGORITHM)
@@ -33,7 +33,7 @@ class RefreshToken
       {
         email: user.email,
         exp: expiration,
-        version: user.token_version
+        version: user.token_version,
       }
     end
 

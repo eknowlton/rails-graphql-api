@@ -1,5 +1,5 @@
 class SuspendUserMutation < Types::BaseMutation
-  description 'Suspend a user'
+  description "Suspend a user"
 
   argument :id, ID, required: true
 
@@ -12,9 +12,9 @@ class SuspendUserMutation < Types::BaseMutation
     user = User.find(input.id)
 
     if user.suspend
-      { user: user, errors: [] }
+      {user: user, errors: []}
     else
-      { user: nil, errors: user.errors }
+      {user: nil, errors: user.errors}
     end
   end
 end

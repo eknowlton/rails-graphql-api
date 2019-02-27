@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CreateUsersFromCSV do
-  it 'creates a user specified in csv format' do
-    file_path = 'spec/fixtures/test_users.csv'
+  it "creates a user specified in csv format" do
+    file_path = "spec/fixtures/test_users.csv"
 
     results = CreateUsersFromCSV.new(file_path).call
 

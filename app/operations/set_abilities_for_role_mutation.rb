@@ -1,5 +1,5 @@
 class SetAbilitiesForRoleMutation < Types::BaseMutation
-  description 'Syncs the abilities of the specified role to those provided'
+  description "Syncs the abilities of the specified role to those provided"
 
   argument :id, ID, required: true
   argument :abilities, [Types::AbilityType], required: true
@@ -14,9 +14,9 @@ class SetAbilitiesForRoleMutation < Types::BaseMutation
     result = SyncAbilities.new(role, input.abilities).call
 
     if result.success?
-      { role: role, errors: [] }
+      {role: role, errors: []}
     else
-      { role: nil, errors: role.errors }
+      {role: nil, errors: role.errors}
     end
   end
 end

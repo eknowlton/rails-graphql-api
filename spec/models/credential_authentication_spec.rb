@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CredentialAuthentication do
-  it 'returns an access token and refresh token when provided with a valid email and password' do
-    user = create(:user, password: 'test-password')
-    auth = described_class.new(email: user.email, password: 'test-password')
+  it "returns an access token and refresh token when provided with a valid email and password" do
+    user = create(:user, password: "test-password")
+    auth = described_class.new(email: user.email, password: "test-password")
 
     result = auth.authenticate
 
@@ -13,26 +13,26 @@ RSpec.describe CredentialAuthentication do
     expect(result.user).to eq(user)
   end
 
-  it 'fails when provided with a email that does not exist' do
-    auth = described_class.new(email: 'not-valid@test.com', password: 'password')
+  it "fails when provided with a email that does not exist" do
+    auth = described_class.new(email: "not-valid@test.com", password: "password")
 
     result = auth.authenticate
 
     expect(result.success?).to be(false)
   end
 
-  it 'fails when provided with an invalid password' do
+  it "fails when provided with an invalid password" do
     user = create(:user)
-    auth = described_class.new(email: user.email, password: 'not-valid-email')
+    auth = described_class.new(email: user.email, password: "not-valid-email")
 
     result = auth.authenticate
 
     expect(result.success?).to be(false)
   end
 
-  it 'fails if the user is suspended' do
-    user = create(:user, :suspended, password: 'test-password')
-    auth = described_class.new(email: user.email, password: 'test-password')
+  it "fails if the user is suspended" do
+    user = create(:user, :suspended, password: "test-password")
+    auth = described_class.new(email: user.email, password: "test-password")
 
     result = auth.authenticate
 

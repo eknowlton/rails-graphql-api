@@ -10,7 +10,7 @@ class ResetPassword
     if reset_token
       use_token(reset_token)
     else
-      Result.failure(['Password reset is expired or invalid'])
+      Result.failure(["Password reset is expired or invalid"])
     end
   end
 

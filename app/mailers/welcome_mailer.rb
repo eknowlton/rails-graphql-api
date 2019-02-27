@@ -3,6 +3,6 @@ class WelcomeMailer < ApplicationMailer
     @user = user
     @token = user.reset_password_token.body
 
-    mail(to: @user.email, subject: 'Welcome To Kimmel')
+    mail(to: @user.email, subject: "Welcome To Kimmel")
   end
 end

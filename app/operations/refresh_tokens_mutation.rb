@@ -15,12 +15,12 @@ class RefreshTokensMutation < Types::BaseMutation
     result = RefreshTokens.new(input.refresh_token).call
 
     if result.success?
-      { user: result.user,
-        access_token: result.access_token,
-        refresh_token: result.refresh_token,
-        errors: [] }
+      {user: result.user,
+       access_token: result.access_token,
+       refresh_token: result.refresh_token,
+       errors: [],}
     else
-      { user: nil, access_token: nil, refresh_token: nil, errors: result.errors }
+      {user: nil, access_token: nil, refresh_token: nil, errors: result.errors}
     end
   end
 end

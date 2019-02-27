@@ -1,24 +1,24 @@
 class User < ApplicationRecord
   belongs_to :role, optional: true
   has_one :reset_password_token,
-          -> { order(created_at: :desc) },
-          inverse_of: :user,
-          dependent: :destroy
+    -> { order(created_at: :desc) },
+    inverse_of: :user,
+    dependent: :destroy
   has_many :permissions,
-           as: :permissable,
-           inverse_of: :permissable,
-           dependent: :destroy
+    as: :permissable,
+    inverse_of: :permissable,
+    dependent: :destroy
   has_many :role_permissions, through: :role, source: :permissions
 
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }, allow_nil: true
+  validates :password, length: {minimum: 8}, allow_nil: true
   validates :intranet_id, allow_nil: true, numericality: {
     only_integer: true,
-    greater_than: 0
+    greater_than: 0,
   }
   validates :walter_id, allow_nil: true, numericality: {
     only_integer: true,
-    greater_than: 0
+    greater_than: 0,
   }
   validates :first_name, presence: true
   validates :last_name, presence: true

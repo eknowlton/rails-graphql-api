@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ApplicationPolicy do
-  describe '#logged_in?' do
-    it 'returns true for a user' do
+  describe "#logged_in?" do
+    it "returns true for a user" do
       user = User.new
       policy = described_class.new(user)
 
@@ -11,7 +11,7 @@ RSpec.describe ApplicationPolicy do
       expect(logged_in).to be(true)
     end
 
-    it 'returns false for a guest' do
+    it "returns false for a guest" do
       user = Guest.new
       policy = described_class.new(user)
 

@@ -3,7 +3,7 @@ module Types
     include Operation
 
     def self.graphql_name
-      super.chomp('Mutation')
+      super.chomp("Mutation")
     end
   end
 end

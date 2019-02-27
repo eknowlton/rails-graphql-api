@@ -6,7 +6,7 @@ class EnvGenerator
 
   def call
     if env_file_exists?
-      puts 'Old .env found. Moving to .env.old... '
+      Rails.logger.info "Old .env found. Moving to .env.old... "
       move_current_env
     end
     parse_env_example
@@ -24,7 +24,7 @@ class EnvGenerator
   end
 
   def write_env_file
-    File.open("#{APP_ROOT}/.env", 'w+') { |f| f.write(output) }
+    File.open("#{APP_ROOT}/.env", "w+") { |f| f.write(output) }
   end
 
   def move_current_env

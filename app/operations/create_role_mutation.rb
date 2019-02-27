@@ -1,5 +1,5 @@
 class CreateRoleMutation < Types::BaseMutation
-  description 'Creates a new role'
+  description "Creates a new role"
 
   argument :role_input, Inputs::Role, required: true
 
@@ -12,9 +12,9 @@ class CreateRoleMutation < Types::BaseMutation
     role = Role.new(role_args)
 
     if role.save
-      { role: role, errors: [] }
+      {role: role, errors: []}
     else
-      { role: nil, errors: role.errors }
+      {role: nil, errors: role.errors}
     end
   end
 

@@ -1,5 +1,5 @@
 class UserQuery < Types::BaseResolver
-  description 'The user for the specified id'
+  description "The user for the specified id"
   argument :id, ID, required: true
   type Outputs::UserType, null: true
   policy ApplicationPolicy, :logged_in?

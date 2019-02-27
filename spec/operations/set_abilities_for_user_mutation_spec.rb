@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Set Abilities for User Mutation API', :graphql do
-  describe 'setAbilitiesForUser' do
+describe "Set Abilities for User Mutation API", :graphql do
+  describe "setAbilitiesForUser" do
     let(:query) do
       <<~'GRAPHQL'
         mutation($input: SetAbilitiesForUserInput!) {
@@ -14,18 +14,18 @@ describe 'Set Abilities for User Mutation API', :graphql do
       GRAPHQL
     end
 
-    it 'gives an ability to a user' do
+    it "gives an ability to a user" do
       user = create(:user)
       acting_user = build(:user, abilities: [:manage_central])
-      first_ability, second_ability = Abilities.take(2).map do |ability|
+      first_ability, second_ability = Abilities.take(2).map { |ability|
         ability.to_s.upcase
-      end
+      }
 
       result = execute query, as: acting_user, variables: {
         input: {
           id: user.id,
-          abilities: [first_ability, second_ability]
-        }
+          abilities: [first_ability, second_ability],
+        },
       }
 
       user_abilities = result[:data][:setAbilitiesForUser][:user][:abilities]

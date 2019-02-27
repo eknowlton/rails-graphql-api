@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class CreateUsersFromCSV
   def initialize(path)
@@ -7,12 +7,12 @@ class CreateUsersFromCSV
 
   def call
     csv = CSV.parse(file, headers: true)
-    results = csv.map do |row|
+    results = csv.map { |row|
       CreateUser.new(row.to_h.symbolize_keys).call
-    end
+    }
     {
       successes: results.select(&:success?),
-      failures: results.reject(&:success?)
+      failures: results.reject(&:success?),
     }
   end
 

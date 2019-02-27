@@ -1,5 +1,5 @@
 class DeleteRoleMutation < Types::BaseMutation
-  description 'Delete the specified role'
+  description "Delete the specified role"
 
   argument :id, ID, required: true
 
@@ -11,6 +11,6 @@ class DeleteRoleMutation < Types::BaseMutation
   def authorized_resolve
     role = Role.find(input.id).destroy
 
-    { success: role.deleted?, errors: role.errors }
+    {success: role.deleted?, errors: role.errors}
   end
 end

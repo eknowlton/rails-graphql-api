@@ -1,5 +1,5 @@
 class RolesQuery < Types::BaseResolver
-  description 'Get all roles'
+  description "Get all roles"
   type [Outputs::RoleType], null: false
   policy ApplicationPolicy, :logged_in?
 

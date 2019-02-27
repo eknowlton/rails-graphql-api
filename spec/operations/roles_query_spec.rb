@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Roles Query API', :graphql do
-  describe 'roles' do
+describe "Roles Query API", :graphql do
+  describe "roles" do
     let(:query) do
       <<~'GRAPHQL'
         query {
@@ -12,7 +12,7 @@ describe 'Roles Query API', :graphql do
       GRAPHQL
     end
 
-    it 'gets all roles' do
+    it "gets all roles" do
       role = create(:role)
 
       result = execute query, as: build(:user)

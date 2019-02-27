@@ -1,5 +1,5 @@
 class SendResetPasswordMutation < Types::BaseMutation
-  description 'Triggers a reset password email'
+  description "Triggers a reset password email"
 
   argument :email, String, required: true
 
@@ -9,9 +9,9 @@ class SendResetPasswordMutation < Types::BaseMutation
     result = CreateResetPasswordToken.new(find_user).call
 
     if result.success?
-      { success: true }
+      {success: true}
     else
-      { success: false }
+      {success: false}
     end
   end
 

@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Result do
-  it 'returns a successful result' do
+  it "returns a successful result" do
     result = described_class.success(works: true)
 
     expect(result.success?).to eq(true)
@@ -9,10 +9,10 @@ RSpec.describe Result do
     expect(result.errors).to be_empty
   end
 
-  it 'returns a failure result' do
-    result = described_class.failure(['did not work'])
+  it "returns a failure result" do
+    result = described_class.failure(["did not work"])
 
     expect(result.success?).to eq(false)
-    expect(result.errors).to include('did not work')
+    expect(result.errors).to include("did not work")
   end
 end

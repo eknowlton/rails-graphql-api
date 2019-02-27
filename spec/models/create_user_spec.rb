@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CreateUser do
-  describe '#call' do
-    it 'creates a new user with a random password' do
+  describe "#call" do
+    it "creates a new user with a random password" do
       params = attributes_for(:user)
 
       result = described_class.new(params).call
@@ -13,33 +13,33 @@ RSpec.describe CreateUser do
       expect(result.success?).to be(true)
     end
 
-    it 'sends a welcome email' do
+    it "sends a welcome email" do
       params = attributes_for(:user)
 
-      result = perform_enqueued_jobs do
+      result = perform_enqueued_jobs {
         described_class.new(params).call
-      end
+      }
 
       delivery = ActionMailer::Base.deliveries.last
       expect(delivery.to).to include(result.user.email)
     end
 
-    it 'broadcasts that the user has been created' do
-      params = attributes_for(:user, email: 'john@kimmel.com')
+    it "broadcasts that the user has been created" do
+      params = attributes_for(:user, email: "john@kimmel.com")
 
       described_class.new(params).call
 
-      messages = DeliveryBoy.testing.messages_for('user_test')
+      messages = DeliveryBoy.testing.messages_for("user_test")
       expect(messages.count).to eq(1)
       event = JSON.parse(messages.first.value)
-      expect(event['type']).to eq('user_created')
-      expect(event['user']['email']).to eq('john@kimmel.com')
+      expect(event["type"]).to eq("user_created")
+      expect(event["user"]["email"]).to eq("john@kimmel.com")
     end
 
-    it 'returns errors when user is not valid' do
+    it "returns errors when user is not valid" do
       params = {
-        first_name: 'John',
-        last_name: 'Doe'
+        first_name: "John",
+        last_name: "Doe",
       }
 
       result = described_class.new(params).call

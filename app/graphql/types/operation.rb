@@ -25,7 +25,8 @@ module Types
       end
     end
 
-    def resolve; end
+    def resolve
+    end
 
     def authorize(record = nil)
       return if authorized?(current_user, record)
@@ -45,14 +46,14 @@ module Types
     def authenticated_error
       raise GraphQL::ExecutionError.new(
         "You must be authenticated to access #{self.class.graphql_name}",
-        extensions: { code: 'UNAUTHENTICATED' }
+        extensions: {code: "UNAUTHENTICATED"}
       )
     end
 
     def authorized_error
       raise GraphQL::ExecutionError.new(
         "You don't have permission to access #{self.class.graphql_name}",
-        extensions: { code: 'UNAUTHORIZED' }
+        extensions: {code: "UNAUTHORIZED"}
       )
     end
 

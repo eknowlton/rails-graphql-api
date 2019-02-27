@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  context 'validations' do
-    it 'is valid with valid attributes' do
+  context "validations" do
+    it "is valid with valid attributes" do
       expect(build(:user)).to be_valid
     end
 
@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:hire_date) }
     it { should validate_presence_of(:token_version) }
 
-    it 'is not valid with a non-unique email' do
+    it "is not valid with a non-unique email" do
       user = create(:user)
       duplicate_user = build(:user, email: user.email)
 
@@ -25,8 +25,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.active' do
-    it 'can find active users' do
+  describe ".active" do
+    it "can find active users" do
       user = create(:user)
 
       found_user = described_class.active.first
@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
       expect(found_user).to eq(user)
     end
 
-    it 'does not find suspended users' do
+    it "does not find suspended users" do
       create(:user, :suspended)
 
       found_user = described_class.active.first
@@ -43,8 +43,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#guest?' do
-    it 'returns false' do
+  describe "#guest?" do
+    it "returns false" do
       user = User.new
 
       result = user.guest?
@@ -53,8 +53,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#abilites' do
-    it 'returns the abilities that are assigned to a user' do
+  describe "#abilites" do
+    it "returns the abilities that are assigned to a user" do
       ability = Abilities.first
       user = described_class.new
       user.permissions.new(ability: ability)
@@ -64,7 +64,7 @@ RSpec.describe User, type: :model do
       expect(abilities).to include(ability)
     end
 
-    it 'returns any abilities the user has gained from their role' do
+    it "returns any abilities the user has gained from their role" do
       ability = Abilities.first
       role = create(:role)
       role.permissions.create(ability: ability)
@@ -76,8 +76,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#abilities=' do
-    it 'assigns temporary abilities to the user' do
+  describe "#abilities=" do
+    it "assigns temporary abilities to the user" do
       first_ability, second_ability = Abilities.take(2)
       user = create(:user)
 
@@ -87,7 +87,7 @@ RSpec.describe User, type: :model do
       expect(User.first.abilities).not_to include(first_ability, second_ability)
     end
 
-    it 'does not assign abilities that do not exist' do
+    it "does not assign abilities that do not exist" do
       user = create(:user)
 
       user.abilities = [:fake_ability]
@@ -96,8 +96,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#can?' do
-    it 'returns true if the user has the ability to perform the specified action' do
+  describe "#can?" do
+    it "returns true if the user has the ability to perform the specified action" do
       ability = Abilities.first
       user = described_class.new(abilities: [ability])
 
@@ -106,7 +106,7 @@ RSpec.describe User, type: :model do
       expect(can).to be(true)
     end
 
-    it 'returns false if the user does not have the ability to perform the specified action' do
+    it "returns false if the user does not have the ability to perform the specified action" do
       user = described_class.new
 
       can = user.can?(:do_anything)
@@ -115,8 +115,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#suspend' do
-    it 'makes the user inactive' do
+  describe "#suspend" do
+    it "makes the user inactive" do
       user = create(:user, active: true)
 
       user.suspend
@@ -125,30 +125,30 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#update_password' do
-    it 'confirms the current password and then changes it' do
-      user = create(:user, password: 'original')
+  describe "#update_password" do
+    it "confirms the current password and then changes it" do
+      user = create(:user, password: "original")
       original_password = user.password_digest
 
-      result = user.update_password(current: 'original', new: 'new_password')
+      result = user.update_password(current: "original", new: "new_password")
 
       expect(result).to be(true)
       expect(user.reload.password_digest).not_to eq(original_password)
     end
 
-    it 'does not update the password if the provided current password does not match' do
-      user = create(:user, password: 'original')
+    it "does not update the password if the provided current password does not match" do
+      user = create(:user, password: "original")
       original_password = user.password_digest
 
-      result = user.update_password(current: 'not_a_match', new: 'new_password')
+      result = user.update_password(current: "not_a_match", new: "new_password")
 
       expect(result).to be(false)
       expect(user.reload.password_digest).to eq(original_password)
     end
   end
 
-  describe '#admin?' do
-    it 'returns true if the user is an admin' do
+  describe "#admin?" do
+    it "returns true if the user is an admin" do
       user = create(:user, abilities: [:manage_central])
 
       result = user.admin?
@@ -156,7 +156,7 @@ RSpec.describe User, type: :model do
       expect(result).to be(true)
     end
 
-    it 'returns false if the user is not an admin' do
+    it "returns false if the user is not an admin" do
       user = create(:user, abilities: [])
 
       result = user.admin?
@@ -165,8 +165,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#invalidate_tokens' do
-    it 'increments the token_version' do
+  describe "#invalidate_tokens" do
+    it "increments the token_version" do
       user = create(:user, token_version: 2)
 
       result = user.invalidate_tokens
@@ -176,21 +176,21 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#preferred_name' do
-    it 'returns nickname if the user has one' do
-      user = build_stubbed(:user, nickname: 'Jo', first_name: 'John')
+  describe "#preferred_name" do
+    it "returns nickname if the user has one" do
+      user = build_stubbed(:user, nickname: "Jo", first_name: "John")
 
       result = user.preferred_name
 
-      expect(result).to eq('Jo')
+      expect(result).to eq("Jo")
     end
 
-    it 'returns first_name if the user does not have a nickname' do
-      user = build_stubbed(:user, nickname: nil, first_name: 'John')
+    it "returns first_name if the user does not have a nickname" do
+      user = build_stubbed(:user, nickname: nil, first_name: "John")
 
       result = user.preferred_name
 
-      expect(result).to eq('John')
+      expect(result).to eq("John")
     end
   end
 end

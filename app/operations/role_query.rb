@@ -1,5 +1,5 @@
 class RoleQuery < Types::BaseResolver
-  description 'The role for the specified id'
+  description "The role for the specified id"
   argument :id, ID, required: true
   type Outputs::RoleType, null: true
   policy ApplicationPolicy, :logged_in?

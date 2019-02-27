@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Delete Role Mutation API', :graphql do
-  describe 'deleteRole' do
+describe "Delete Role Mutation API", :graphql do
+  describe "deleteRole" do
     let(:query) do
       <<~'GRAPHQL'
         mutation($input: DeleteRoleInput!) {
@@ -12,11 +12,11 @@ describe 'Delete Role Mutation API', :graphql do
       GRAPHQL
     end
 
-    it 'deletes the specified role' do
+    it "deletes the specified role" do
       user = build(:user, abilities: [:manage_central])
       role = create(:role)
 
-      result = execute query, as: user, variables: { input: { id: role.id } }
+      result = execute query, as: user, variables: {input: {id: role.id}}
 
       expect(result[:data][:deleteRole][:success]).to be(true)
       expect(role.reload.deleted_at).not_to be(nil)
