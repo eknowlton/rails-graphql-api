@@ -3,5 +3,6 @@ Abilities = Array.new(
     manage_central
     manage_messaging
     manage_doors
+    see_calling
   ]
 )
