@@ -3,6 +3,7 @@ enum Ability {
   MANAGE_CENTRAL
   MANAGE_DOORS
   MANAGE_MESSAGING
+  SEE_CALLING
 }
 
 interface ActiveRecord {

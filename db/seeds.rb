@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+role = Role.create!(
+  name: "Admin"
+)
+
+SyncAbilities.new(role, Abilities).call
+
 User.create!(
   walter_id: 1,
   intranet_id: 1,
+  role: role,
   email: "test@kimmel.com",
   password: "Tester12",
   first_name: "John",
@@ -21,6 +28,7 @@ User.create!(
 User.create!(
   walter_id: 2,
   intranet_id: 2,
+  role: role,
   email: "example@kimmel.com",
   password: "Tester12",
   first_name: "Jane",
