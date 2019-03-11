@@ -8,12 +8,7 @@ module Types
 
     attr_reader :input
 
-    def initialize(object:, context:)
-      @object = object
-      @context = context
-    end
-
-    delegate :authorized?, to: :class
+    delegate :can_access?, to: :class
 
     def resolver(**args)
       @input = OpenStruct.new(args)
@@ -29,7 +24,8 @@ module Types
     end
 
     def authorize(record = nil)
-      return if authorized?(current_user, record)
+      return if can_access?(current_user, record)
+
       if current_user.guest?
         authenticated_error
       else
@@ -65,7 +61,7 @@ module Types
         @policy_method = policy_method
       end
 
-      def authorized?(current_user, record = nil)
+      def can_access?(current_user, record = nil)
         policy_class.new(current_user, record).send(policy_method)
       end
     end
