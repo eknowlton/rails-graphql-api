@@ -5,6 +5,7 @@ module Outputs
     field :email, String, null: false
     field :first_name, String, null: false
     field :last_name, String, null: false
+    field :walter_id, String, null: true
     field :nickname, String, null: true
     field :abbreviation, String, null: false
     field :title, String, null: false

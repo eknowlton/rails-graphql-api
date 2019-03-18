@@ -649,6 +649,7 @@ type User implements ActiveRecord {
   The date and time the record was last updated
   """
   updatedAt: ISO8601DateTime!
+  walterId: String
 }
 
 """
