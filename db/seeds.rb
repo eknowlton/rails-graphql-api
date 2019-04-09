@@ -20,22 +20,22 @@ user_data = [
     abbreviation: "JEH",
   },
   {
-    first_name: "Alex",
-    last_name: "Smith",
-    email: "demo@kimmel.com",
-    abbreviation: "AXS",
-  },
-  {
-    first_name: "Mary",
+    first_name: "Mark",
     last_name: "Jones",
-    email: "software@kimmel.com",
-    abbreviation: "MRJ",
+    email: "demo@kimmel.com",
+    abbreviation: "MJJ",
   },
   {
-    first_name: "Richard",
-    last_name: "Roe",
+    first_name: "Charlie",
+    last_name: "Kimmel",
+    email: "software@kimmel.com",
+    abbreviation: "CKK",
+  },
+  {
+    first_name: "Jeremy",
+    last_name: "Kimmel",
     email: "development@kimmel.com",
-    abbreviation: "RRR",
+    abbreviation: "JOK",
   },
 ]
 
