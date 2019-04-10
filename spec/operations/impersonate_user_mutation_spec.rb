@@ -22,7 +22,7 @@ describe "Impersonate User Mutation API", :graphql do
 
       result = execute query, as: user, variables: {
         input: {
-          userId: impersonated_user.id,
+          email: impersonated_user.email,
         },
       }
 

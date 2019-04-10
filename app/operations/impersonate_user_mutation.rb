@@ -1,7 +1,7 @@
 class ImpersonateUserMutation < Types::BaseMutation
   description "Provides refresh and access tokens for the specified user"
 
-  argument :user_id, ID, required: true
+  argument :email, String, required: true
 
   field :user, Outputs::UserType, null: true
   field :access_token, String, null: true
@@ -10,7 +10,7 @@ class ImpersonateUserMutation < Types::BaseMutation
   policy UserPolicy, :manage?
 
   def authorized_resolve
-    user = User.find(input.user_id)
+    user = User.find_by!(email: input.email)
 
     {
       user: user,
