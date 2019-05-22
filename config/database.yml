@@ -22,6 +22,7 @@ default: &default
   database: <%= ENV.fetch("DATABASE_NAME") { 'central' } %>
   username: <%= ENV["DATABASE_USERNAME"] { 'root' } %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
+  port: <%= ENV["DATABASE_PORT"] { '5432' } %>
 
 requiressl: &requiressl
   <<: *default
