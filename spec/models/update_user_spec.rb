@@ -22,7 +22,7 @@ RSpec.describe UpdateUser do
 
       described_class.new(user: user, params: {first_name: "John"}).call
 
-      messages = DeliveryBoy.testing.messages_for("user_test")
+      messages = DeliveryBoy.testing.messages_for("user")
       expect(messages.count).to eq(1)
       event = JSON.parse(messages.first.value)
       expect(event["type"]).to eq("user_updated")

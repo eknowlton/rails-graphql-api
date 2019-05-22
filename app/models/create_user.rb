@@ -38,7 +38,7 @@ class CreateUser
   def notify_user_created(user)
     DeliveryBoy.deliver_async(
       UserCreatedEvent.new(user).to_json,
-      topic: "user_#{Rails.env}",
+      topic: "user",
       partition_key: user.id
     )
   end

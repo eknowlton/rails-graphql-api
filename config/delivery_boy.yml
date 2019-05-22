@@ -2,11 +2,15 @@
 common: &common
   client_id: "central_api"
 
+sasl: &sasl
+  ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
+  sasl_plain_username: <%= Rails.application.credentials.dig(Rails.env.to_sym, :kafka_username) %>
+  sasl_plain_password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :kafka_password) %>
+
 development:
   <<: *common
   brokers:
     - localhost:9092
-
 
 test:
   <<: *common
@@ -15,18 +19,12 @@ test:
 
 staging:
   <<: *common
-  sasl_scram_username: <%= Rails.application.credentials.dig(:kafka_username) %>
-  sasl_scram_password: <%= Rails.application.credentials.dig(:kafka_password) %>
-  sasl_scram_mechanism: sha256
-  ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
+  <<: *sasl
   brokers:
-    - deluxe-caboose-01.srvs.cloudkafka.com:9094
+    - pkc-e0x5p.us-east1.gcp.confluent.cloud:9092
 
 production:
   <<: *common
-  sasl_scram_username: <%= Rails.application.credentials.dig(:kafka_username) %>
-  sasl_scram_password: <%= Rails.application.credentials.dig(:kafka_password) %>
-  sasl_scram_mechanism: sha256
-  ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
+  <<: *sasl
   brokers:
-    - deluxe-caboose-01.srvs.cloudkafka.com:9094
+    - pkc-e0x5p.us-east1.gcp.confluent.cloud:9092
