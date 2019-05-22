@@ -23,6 +23,11 @@ default: &default
   username: <%= ENV["DATABASE_USERNAME"] { 'root' } %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
 
+verifyssl: &verifyssl
+  <<: *default
+  sslmode: verify-full
+  sslrootcert: <%= ENV["DATABASE_CERTIFICATE"] %>
+
 development:
   <<: *default
 
@@ -31,7 +36,7 @@ test:
   database: central_test
 
 staging:
-  <<: *default
+  <<: *verifyssl
 
 production:
-  <<: *default
+  <<: *verifyssl
