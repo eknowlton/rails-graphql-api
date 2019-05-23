@@ -6,10 +6,10 @@ test:
 
 staging:
   adapter: redis
-  url: <%= Rails.application.credentials.dig(Rails.env.to_sym, :redis_url) %>
+  url: <%= ENV.fetch("REDIS_URL") { 'localhost:6379' } %>
   channel_prefix: central_staging
 
 production:
   adapter: redis
-  url: <%= Rails.application.credentials.dig(Rails.env.to_sym, :redis_url) %>
+  url: <%= ENV.fetch("REDIS_URL") { 'localhost:6379' } %>
   channel_prefix: central_production
