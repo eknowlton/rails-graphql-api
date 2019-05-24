@@ -29,8 +29,8 @@ class SyncAbilities
 
   def delete_old_abilities
     permissable
-      .abilities
-      .select { |ability| new_abilities.exclude?(ability) }
-      .each { |ability| Permission.find_by(permissable: permissable, ability: ability).delete }
+      .permissions
+      .select { |permission| new_abilities.exclude?(permission.ability) }
+      .each(&:delete)
   end
 end

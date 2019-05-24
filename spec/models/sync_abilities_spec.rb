@@ -48,5 +48,19 @@ RSpec.describe SyncAbilities do
       expect(user.abilities).to include(user_ability, role_ability)
       expect(user.permissions).not_to include(ability: role_ability)
     end
+
+    it "does not remove permissions on a user that are provided by the role" do
+      role_ability = Abilities.first
+      role = create(:role)
+      role.permissions.create(ability: role_ability)
+
+      user = create(:user, role: role)
+      new_ability = Abilities.second
+
+      result = described_class.new(user, [new_ability]).call
+
+      expect(result.success?).to eq(true)
+      expect(user.abilities).to include(new_ability, role_ability)
+    end
   end
 end
