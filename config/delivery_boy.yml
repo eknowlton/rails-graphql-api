@@ -3,7 +3,7 @@ common: &common
   client_id: "central_api"
 
 sasl: &sasl
-  ssl_ca_cert: "<%= Rails.application.credentials.dig(:kafka_cert) %>"
+  ssl_ca_certs_from_system: true
   sasl_plain_username: <%= Rails.application.credentials.dig(Rails.env.to_sym, :kafka_username) %>
   sasl_plain_password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :kafka_password) %>
 
