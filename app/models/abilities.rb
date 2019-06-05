@@ -4,5 +4,6 @@ Abilities = Array.new(
     manage_messaging
     manage_doors
     see_calling
+    manage_billing
   ]
 )

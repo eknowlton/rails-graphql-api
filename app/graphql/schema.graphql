@@ -2,6 +2,7 @@
 An ability that grants permissions
 """
 enum Ability {
+  MANAGE_BILLING
   MANAGE_CENTRAL
   MANAGE_DOORS
   MANAGE_MESSAGING
