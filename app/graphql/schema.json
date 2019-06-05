@@ -638,7 +638,7 @@
               "deprecationReason": null
             },
             {
-              "name": "MANAGE_BILLING",
+              "name": "MANAGE_BILLINGS",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
