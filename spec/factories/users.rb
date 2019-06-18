@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    walter_id 1
-    intranet_id 1
+    walter_id { 1 }
+    intranet_id { 1 }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
     first_name { Faker::Name.first_name }
@@ -9,10 +9,10 @@ FactoryBot.define do
     abbreviation { Faker::Name.initials }
     title { Faker::Job.title }
     hire_date { Faker::Date.between(10.years.ago, Date.current) }
-    active true
+    active { true }
 
     trait :suspended do
-      active false
+      active { false }
     end
   end
 end

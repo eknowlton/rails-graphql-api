@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :permission do
-    ability Abilities.first
+    ability { Abilities.first }
     association :permissable, factory: :user
   end
 end
