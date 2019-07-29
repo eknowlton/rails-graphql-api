@@ -270,8 +270,15 @@ input PatchRoleInput {
 The properties of a user that can be updated
 """
 input PatchUserInput {
+  abbreviation: String
+  birthDate: Date
   firstName: String
+  hireDate: Date
   lastName: String
+  linkedinUrl: String
+  nickname: String
+  title: String
+  walterId: Int
 }
 
 type Query {
@@ -666,4 +673,5 @@ input UserInput {
   linkedinUrl: String
   nickname: String
   title: String!
+  walterId: Int
 }
