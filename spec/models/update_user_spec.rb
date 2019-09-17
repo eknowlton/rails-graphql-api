@@ -19,14 +19,11 @@ RSpec.describe UpdateUser do
 
     it "broadcasts that the user has been updated" do
       user = create(:user)
+      broadcast_spy = stub_const("BroadcastUser", spy)
 
       described_class.new(user: user, params: {first_name: "John"}).call
 
-      messages = DeliveryBoy.testing.messages_for("user")
-      expect(messages.count).to eq(1)
-      event = JSON.parse(messages.first.value)
-      expect(event["type"]).to eq("user_updated")
-      expect(event["user"]["first_name"]).to eq("John")
+      expect(broadcast_spy).to have_received(:call)
     end
 
     it "returns errors when user is not valid" do

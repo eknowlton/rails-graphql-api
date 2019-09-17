@@ -6,7 +6,7 @@ class UpdateUser
 
   def call
     if user.update(params)
-      notify_user_updated(user)
+      BroadcastUser.new(user).call
       Result.success(user: user)
     else
       Result.failure(user.errors)
@@ -16,12 +16,4 @@ class UpdateUser
   private
 
   attr_reader :user, :params
-
-  def notify_user_updated(user)
-    DeliveryBoy.deliver_async(
-      UserUpdatedEvent.new(user).to_json,
-      topic: "user",
-      partition_key: user.id
-    )
-  end
 end

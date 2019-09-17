@@ -1,13 +1,13 @@
-class UserCreatedEvent
+class UserEvent
   def initialize(user)
     @user = user
   end
 
   def to_json
     {
-      type: "user_created",
+      type: "user",
       published_at: Time.current,
-      user: user_hash,
+      data: user_hash,
     }.to_json
   end
 
