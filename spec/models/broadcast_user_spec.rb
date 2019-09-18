@@ -7,7 +7,7 @@ RSpec.describe BroadcastUser do
 
       described_class.new(user).call
 
-      messages = DeliveryBoy.testing.messages_for("user")
+      messages = DeliveryBoy.testing.messages_for("kimmel")
       expect(messages.count).to eq(1)
       event = JSON.parse(messages.first.value)
       expect(event["type"]).to eq("user")

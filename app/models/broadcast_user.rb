@@ -6,7 +6,7 @@ class BroadcastUser
   def call
     DeliveryBoy.deliver_async(
       UserEvent.new(user).to_json,
-      topic: "user",
+      topic: "kimmel",
       key: "user-#{user.id}",
       partition_key: user.id
     )
