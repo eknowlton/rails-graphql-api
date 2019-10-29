@@ -15,7 +15,7 @@ describe "Suspend User Mutation API", :graphql do
     end
 
     it "suspends a user" do
-      acting_user = build(:user, abilities: [:manage_central])
+      acting_user = build(:user, abilities: [:manage_testmydev])
       user = create(:user, active: true)
 
       execute query, as: acting_user, variables: {

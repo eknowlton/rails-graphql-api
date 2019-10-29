@@ -24,12 +24,12 @@ RSpec.describe AccessToken do
     end
 
     it "it contains the users abilities" do
-      user = create(:user, abilities: [:manage_central])
+      user = create(:user, abilities: [:manage_testmydev])
       token_body = AccessToken.issue(user)
 
       decoded_token = AccessToken.decode(token_body)
 
-      expect(decoded_token.abilities).to include("manage_central")
+      expect(decoded_token.abilities).to include("manage_testmydev")
     end
 
     it "it decodes the provided invalid token body" do

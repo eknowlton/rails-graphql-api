@@ -1,6 +1,6 @@
 class GraphqlController < ApplicationController
   def execute
-    result = CentralSchema.execute(
+    result = TestMyDevSchema.execute(
       params[:query],
       variables: ensure_hash(params[:variables]),
       context: {current_user: current_user},

@@ -8,7 +8,6 @@ class CreateUser
 
     if user.save
       send_welcome(user)
-      BroadcastUser.new(user).call
       Result.success(user: user)
     else
       Result.failure(user.errors)

@@ -19,24 +19,20 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
-  database: <%= ENV.fetch("DATABASE_NAME") { 'central' } %>
+  database: <%= ENV.fetch("DATABASE_NAME") { 'testmydev' } %>
   username: <%= ENV.fetch("DATABASE_USERNAME") { 'root' } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD"){ '' } %>
   port: <%= ENV.fetch("DATABASE_PORT") { '5432' } %>
-
-requiressl: &requiressl
-  <<: *default
-  sslmode: require
 
 development:
   <<: *default
 
 test:
   <<: *default
-  database: central_test
+  database: testmydev_test
 
 staging:
-  <<: *requiressl
+  <<: *default
 
 production:
-  <<: *requiressl
+  <<: *default

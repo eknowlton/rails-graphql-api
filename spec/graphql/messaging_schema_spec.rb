@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe CentralSchema do
+RSpec.describe TestMyDevSchema do
   describe "schema dumps" do
     it "has updated schema dumps" do
-      current_definition = CentralSchema.to_definition
-      current_json = CentralSchema.to_json
+      current_definition = TestMyDevSchema.to_definition
+      current_json = TestMyDevSchema.to_json
 
       printout_definition = File.read(Rails.root.join("app", "graphql", "schema.graphql"))
       printout_json = File.read(Rails.root.join("app", "graphql", "schema.json"))

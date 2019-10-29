@@ -38,13 +38,13 @@ chdir APP_ROOT do
   # Gather configuration values
   puts "\n== Application Configuration Setup =="
   application = {}
-  puts "The Rails Master Key can be found in the team 1Password as 'Central API Master Key'"
+  puts "The Rails Master Key can be found in the team 1Password as 'TestMyDev API Master Key'"
   application[:rails_master_key] = ask('Rails Master Key?')
 
   puts "\n== Database Configuration Setup =="
   database = {}
   database[:host] = ask('Database host?', default: 'localhost')
-  database[:name] = ask('Database name?', default: 'central')
+  database[:name] = ask('Database name?', default: 'testmydev')
   database[:username] = ask('Database username?', default: 'root')
   database[:password] = ask('Database password?')
 

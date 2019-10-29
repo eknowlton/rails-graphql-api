@@ -5,7 +5,6 @@ ruby "2.6.3"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
-gem "delivery_boy"
 gem "dotenv-rails"
 gem "graphql", "~> 1.9.0"
 gem "jwt"

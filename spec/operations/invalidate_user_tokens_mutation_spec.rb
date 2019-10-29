@@ -15,7 +15,7 @@ describe "Invalidate User Tokens Mutation API", :graphql do
     end
 
     it "Invalidates all previously issued tokens for a user" do
-      acting_user = build(:user, abilities: [:manage_central])
+      acting_user = build(:user, abilities: [:manage_testmydev])
       user = create(:user, token_version: 1)
       token_body = RefreshToken.issue(user)
 

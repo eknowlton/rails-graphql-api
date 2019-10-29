@@ -17,15 +17,6 @@ RSpec.describe UpdateUser do
       expect(user.first_name).to eq("John")
     end
 
-    it "broadcasts that the user has been updated" do
-      user = create(:user)
-      broadcast_spy = stub_const("BroadcastUser", spy)
-
-      described_class.new(user: user, params: {first_name: "John"}).call
-
-      expect(broadcast_spy).to have_received(:call)
-    end
-
     it "returns errors when user is not valid" do
       user = create(:user, email: "john@kimmel.com")
 

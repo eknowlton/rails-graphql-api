@@ -16,7 +16,7 @@ describe "Update User Mutation API", :graphql do
 
     it "updates the specified user" do
       user = create(:user)
-      acting_user = build(:user, abilities: [:manage_central])
+      acting_user = build(:user, abilities: [:manage_testmydev])
 
       result = execute query, as: acting_user, variables: {
         input: {

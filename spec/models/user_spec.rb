@@ -8,13 +8,8 @@ RSpec.describe User, type: :model do
 
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(8) }
-    it { should validate_numericality_of(:walter_id).only_integer.is_greater_than(0) }
-    it { should validate_numericality_of(:intranet_id).only_integer.is_greater_than(0) }
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
-    it { should validate_presence_of(:abbreviation) }
-    it { should validate_presence_of(:title) }
-    it { should validate_presence_of(:hire_date) }
     it { should validate_presence_of(:token_version) }
 
     it "is not valid with a non-unique email" do
@@ -149,7 +144,7 @@ RSpec.describe User, type: :model do
 
   describe "#admin?" do
     it "returns true if the user is an admin" do
-      user = create(:user, abilities: [:manage_central])
+      user = create(:user, abilities: [:manage_testmydev])
 
       result = user.admin?
 
@@ -173,24 +168,6 @@ RSpec.describe User, type: :model do
 
       expect(result).to be(true)
       expect(user.token_version).to be(3)
-    end
-  end
-
-  describe "#preferred_name" do
-    it "returns nickname if the user has one" do
-      user = build_stubbed(:user, nickname: "Jo", first_name: "John")
-
-      result = user.preferred_name
-
-      expect(result).to eq("Jo")
-    end
-
-    it "returns first_name if the user does not have a nickname" do
-      user = build_stubbed(:user, nickname: nil, first_name: "John")
-
-      result = user.preferred_name
-
-      expect(result).to eq("John")
     end
   end
 end

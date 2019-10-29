@@ -15,7 +15,7 @@ describe "Create User Mutation API", :graphql do
     end
 
     it "makes a new user" do
-      user = build(:user, abilities: [:manage_central])
+      user = build(:user, abilities: [:manage_testmydev])
 
       execute query, as: user, variables: {
         input: {
@@ -23,9 +23,6 @@ describe "Create User Mutation API", :graphql do
             email: "john@kimmel.com",
             firstName: "John",
             lastName: "Doe",
-            abbreviation: "JAD",
-            title: "Tester",
-            hireDate: "2017-01-01",
           },
         },
       }

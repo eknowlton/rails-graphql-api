@@ -2,18 +2,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.references :role, foreign_key: true, null: true
-      t.integer :walter_id, null: true
-      t.integer :intranet_id, null: true
       t.string :email, null: false
       t.string :password_digest, null: false
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.string :nickname, null: true
-      t.string :abbreviation, null: false
-      t.string :title, null: false
-      t.string :linkedin_url, null: true
-      t.date :birth_date, null: true
-      t.date :hire_date, null: false
       t.boolean :active, default: true
       t.integer :token_version, default: 1, null: false
 

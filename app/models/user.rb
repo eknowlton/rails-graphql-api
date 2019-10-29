@@ -12,19 +12,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :password, length: {minimum: 8}, allow_nil: true
-  validates :intranet_id, allow_nil: true, numericality: {
-    only_integer: true,
-    greater_than: 0,
-  }
-  validates :walter_id, allow_nil: true, numericality: {
-    only_integer: true,
-    greater_than: 0,
-  }
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :abbreviation, presence: true
-  validates :title, presence: true
-  validates :hire_date, presence: true
   validates :token_version, presence: true
 
   has_secure_password
@@ -60,15 +49,11 @@ class User < ApplicationRecord
   end
 
   def admin?
-    can?(:manage_central)
+    can?(:manage_testmydev)
   end
 
   def invalidate_tokens
     increment(:token_version).save
-  end
-
-  def preferred_name
-    nickname || first_name
   end
 
   private

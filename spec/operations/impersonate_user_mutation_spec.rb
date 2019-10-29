@@ -17,7 +17,7 @@ describe "Impersonate User Mutation API", :graphql do
     end
 
     it "provides tokens for the specified user" do
-      user = build(:user, abilities: [:manage_central])
+      user = build(:user, abilities: [:manage_testmydev])
       impersonated_user = create(:user)
 
       result = execute query, as: user, variables: {

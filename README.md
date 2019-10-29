@@ -8,7 +8,7 @@
 In your terminal:
 
 ```shell
-$ git clone git@github.com:kimmelsg/central-api.git && cd central-api
+$ git clone git@github.com:eknowlton/api.testmy.dev.git && cd api.testmy.dev
 $ cat .ruby-version
 # Ensure your ruby version matches, use `rbenv` to manage multiple ruby versions
 $ ruby bin/development.rb
@@ -49,7 +49,7 @@ mutation ($input: SignInUserInput!) {
 }
 ```
 
-The second token type is a refresh token which is used to talk back to central and get new tokens issued when the access token has expired.
+The second token type is a refresh token which is used to talk back to testmydev and get new tokens issued when the access token has expired.
 
 Example GraphQL variables and query for refresh token mutation:
 

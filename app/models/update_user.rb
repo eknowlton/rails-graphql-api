@@ -6,7 +6,6 @@ class UpdateUser
 
   def call
     if user.update(params)
-      BroadcastUser.new(user).call
       Result.success(user: user)
     else
       Result.failure(user.errors)

@@ -16,7 +16,7 @@ describe "Set Abilities for User Mutation API", :graphql do
 
     it "gives an ability to a user" do
       user = create(:user)
-      acting_user = build(:user, abilities: [:manage_central])
+      acting_user = build(:user, abilities: [:manage_testmydev])
       first_ability, second_ability = Abilities.take(2).map { |ability|
         ability.to_s.upcase
       }

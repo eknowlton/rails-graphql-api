@@ -50,18 +50,10 @@ ActiveRecord::Schema.define(version: 2018_06_21_131351) do
 
   create_table "users", force: :cascade do |t|
     t.bigint "role_id"
-    t.integer "walter_id"
-    t.integer "intranet_id"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "nickname"
-    t.string "abbreviation", null: false
-    t.string "title", null: false
-    t.string "linkedin_url"
-    t.date "birth_date"
-    t.date "hire_date", null: false
     t.boolean "active", default: true
     t.integer "token_version", default: 1, null: false
     t.datetime "created_at", null: false

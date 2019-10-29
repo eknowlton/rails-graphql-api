@@ -24,15 +24,6 @@ RSpec.describe CreateUser do
       expect(delivery.to).to include(result.user.email)
     end
 
-    it "broadcasts that the user has been created" do
-      params = attributes_for(:user, email: "john@kimmel.com")
-      broadcast_spy = stub_const("BroadcastUser", spy)
-
-      described_class.new(params).call
-
-      expect(broadcast_spy).to have_received(:call)
-    end
-
     it "returns errors when user is not valid" do
       params = {
         first_name: "John",
